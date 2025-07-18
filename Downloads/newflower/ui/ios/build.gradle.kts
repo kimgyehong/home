@@ -23,18 +23,18 @@ kotlin {
         
         framework {
             baseName = "FlowerDiaryUIIOS"
-            export(projects.feature.diary)
-            export(projects.core.common)
-            export(projects.core.domain)
+            export(project(":feature:diary"))
+            export(project(":core:common"))
+            export(project(":core:domain"))
         }
     }
     
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(projects.feature.diary)
-                implementation(projects.core.common)
-                implementation(projects.core.domain)
+                implementation(project(":feature:diary"))
+                implementation(project(":core:common"))
+                implementation(project(":core:domain"))
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:${Versions.Dependencies.kotlinDateTime}")
             }

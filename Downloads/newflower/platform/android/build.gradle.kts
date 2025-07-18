@@ -33,8 +33,8 @@ dependencies {
     implementation(project(":core:common"))
     
     // Android 전용 의존성
-    implementation("androidx.core:core-ktx:1.16.0")
-    implementation("androidx.datastore:datastore-preferences:1.1.7")
+    implementation("androidx.core:core-ktx:${Versions.Dependencies.coreKtx}")
+    implementation("androidx.datastore:datastore-preferences:${Versions.Dependencies.datastorePreferences}")
     
     // SQLDelight Android Driver
     implementation("app.cash.sqldelight:android-driver:${Versions.sqldelight}")
@@ -43,12 +43,12 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}")
     
     // Media Player (BGM용)
-    implementation("androidx.media:media:1.7.0")
+    implementation("androidx.media:media:${Versions.Dependencies.androidxMedia}")
     
     // 테스트
     testImplementation(kotlin("test"))
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    androidTestImplementation("androidx.test.ext:junit:${Versions.Dependencies.junit}")
+    androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.Dependencies.espresso}")
     
     // Detekt formatting plugin
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}")

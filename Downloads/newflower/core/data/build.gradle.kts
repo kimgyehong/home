@@ -21,19 +21,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                // 플랫폼 중립 데이터 계층
+                // 플랫폼 중립 데이터 계층 - 순수 코틀린만 사용
                 api(project(":core:common"))
-                // ❌ core/domain 의존성 제거 - Clean Architecture 원칙 준수
+                api(project(":core:domain"))
                 
-                // SQLDelight
-                implementation("app.cash.sqldelight:runtime:${Versions.sqldelight}")
+                // 순수 코틀린 외부 의존성 - 플랫폼 중립적
                 implementation("app.cash.sqldelight:coroutines-extensions:${Versions.sqldelight}")
-                
-                // Coroutines
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}")
-                
-                // Serialization for JSON parsing
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.Dependencies.kotlinxSerializationJson}")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.serialization}")
             }
         }
         
@@ -45,7 +40,7 @@ kotlin {
         
         val jvmMain by getting {
             dependencies {
-                // JVM 드라이버는 platform 모듈에서 제공
+                implementation("app.cash.sqldelight:sqlite-driver:${Versions.sqldelight}")
             }
         }
         
@@ -62,7 +57,7 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
             
             dependencies {
-                // native-driver는 platform/ios 모듈에서 제공
+                implementation("app.cash.sqldelight:native-driver:${Versions.sqldelight}")
             }
         }
     }

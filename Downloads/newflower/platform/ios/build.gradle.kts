@@ -23,7 +23,7 @@ kotlin {
         
         framework {
             baseName = "FlowerDiaryPlatformIOS"
-            export(projects.core.common)
+            export(project(":core:common"))
         }
         
         pod("SQLite.swift") {
@@ -34,7 +34,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(projects.core.common)
+                implementation(project(":core:common"))
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:${Versions.Dependencies.kotlinDateTime}")
                 implementation("app.cash.sqldelight:native-driver:${Versions.sqldelight}")

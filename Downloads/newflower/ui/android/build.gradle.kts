@@ -39,7 +39,7 @@ android {
     }
     
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
+        kotlinCompilerExtensionVersion = Versions.Dependencies.composeCompiler
     }
     
     packaging {
@@ -69,29 +69,25 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.activity:activity-compose:${Versions.Dependencies.composeActivity}")
-    implementation("androidx.navigation:navigation-compose:2.7.5")
-    
+    implementation("androidx.navigation:navigation-compose:${Versions.Dependencies.navigationCompose}")
     // Android Core
-    implementation("androidx.core:core-ktx:1.16.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.core:core-ktx:${Versions.Dependencies.coreKtx}")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Versions.Dependencies.lifecycleRuntimeKtx}")
     
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.Dependencies.lifecycle}")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:${Versions.Dependencies.lifecycle}")
     
     // Accompanist
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:${Versions.Dependencies.accompanistSystemUi}")
     
     // Media3 (비디오 재생)
-    implementation("androidx.media3:media3-exoplayer:1.2.0")
-    implementation("androidx.media3:media3-ui:1.2.0")
+    implementation("androidx.media3:media3-exoplayer:${Versions.Dependencies.media3}")
+    implementation("androidx.media3:media3-ui:${Versions.Dependencies.media3}")
     
     // Koin
     implementation("io.insert-koin:koin-android:${Versions.koin}")
     implementation("io.insert-koin:koin-androidx-compose:${Versions.koin}")
-    
-    // SQLDelight Android Driver - 이것은 platform:android에서 제공해야 함
-    // implementation("app.cash.sqldelight:android-driver:${Versions.sqldelight}")
     
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}")

@@ -19,9 +19,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                // 순수 Kotlin 라이브러리만 사용 - 플랫폼 중립성 보장
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}")
-                api("org.jetbrains.kotlinx:kotlinx-datetime:${Versions.Dependencies.kotlinDateTime}")
+                // 순수 코틀린만 사용 - 모든 외부 의존성 제거
+                // 플랫폼 중립성 완전 보장
             }
         }
         

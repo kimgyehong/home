@@ -8,8 +8,8 @@ pluginManagement {
     }
     plugins {
         id("org.jetbrains.kotlin.multiplatform") version "2.1.0"
-        id("com.android.library") version "8.6.1"
-        id("com.android.application") version "8.6.1"
+        id("com.android.library") version "8.4.2"
+        id("com.android.application") version "8.4.2"
         id("app.cash.sqldelight") version "2.0.2"
         id("io.gitlab.arturbosch.detekt") version "1.23.7"
         id("org.jetbrains.kotlin.plugin.compose") version "2.1.0"

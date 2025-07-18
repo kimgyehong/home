@@ -21,10 +21,10 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 // 플랫폼 중립 모듈들
-                api(projects.feature.diary)
-                api(projects.core.common)
-                api(projects.core.domain)
-                api(projects.core.data)
+                api(project(":feature:diary"))
+                api(project(":core:common"))
+                api(project(":core:domain"))
+                api(project(":core:data"))
                 
                 // DI - Koin Core
                 api("io.insert-koin:koin-core:${Versions.koin}")

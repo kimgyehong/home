@@ -19,9 +19,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                // 순수 도메인 계층 - 플랫폼 의존성 완전 배제
+                // 순수 도메인 계층 - 모든 외부 의존성 제거
                 api(project(":core:common"))
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}")
             }
         }
         
