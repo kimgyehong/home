@@ -50,6 +50,6 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:${Versions.Dependencies.junit}")
     androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.Dependencies.espresso}")
     
-    // Detekt formatting plugin
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}")
+    // Detekt formatting plugin - 순환 의존성 방지를 위해 제거
+    // detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}")
 }

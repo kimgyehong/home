@@ -13,13 +13,16 @@ allprojects {
 }
 
 subprojects {
-    apply(plugin = "io.gitlab.arturbosch.detekt")
-    
-    afterEvaluate {
-        extensions.findByType<io.gitlab.arturbosch.detekt.extensions.DetektExtension>()?.apply {
-            toolVersion = Versions.detekt
-            config.setFrom("$rootDir/detekt.yml")
-            buildUponDefaultConfig = true
+    // Detekt 플러그인 적용을 Android 앱 모듈에서 제외
+    if (name != "android") {
+        apply(plugin = "io.gitlab.arturbosch.detekt")
+        
+        afterEvaluate {
+            extensions.findByType<io.gitlab.arturbosch.detekt.extensions.DetektExtension>()?.apply {
+                toolVersion = Versions.detekt
+                config.setFrom("$rootDir/detekt.yml")
+                buildUponDefaultConfig = true
+            }
         }
     }
 }

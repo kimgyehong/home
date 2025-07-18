@@ -48,7 +48,7 @@ android {
     }
     
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
+        kotlinCompilerExtensionVersion = Versions.Dependencies.composeCompiler
     }
 }
 
@@ -65,8 +65,8 @@ dependencies {
     implementation(project(":platform:android"))
     
     // Android 기본
-    implementation("androidx.core:core-ktx:1.16.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Versions.Dependencies.lifecycle}")
+    implementation("androidx.core:core-ktx:${Versions.Dependencies.coreKtx}")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Versions.Dependencies.lifecycleRuntimeKtx}")
     implementation("androidx.activity:activity-compose:${Versions.Dependencies.composeActivity}")
     
     // Koin Android
@@ -82,9 +82,9 @@ dependencies {
     
     // 테스트
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    androidTestImplementation("androidx.test.ext:junit:${Versions.Dependencies.junit}")
+    androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.Dependencies.espresso}")
     
-    // Detekt formatting plugin
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}")
+    // Detekt formatting plugin - 순환 의존성 방지를 위해 임시 제거
+    // detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}")
 }
