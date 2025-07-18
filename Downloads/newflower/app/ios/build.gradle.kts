@@ -18,24 +18,24 @@ kotlin {
             baseName = "FlowerDiaryAppIOS"
             isStatic = true
             
-            export(projects.ui.ios)
-            export(projects.feature.diary)
-            export(projects.platform.ios)
-            export(projects.core.common)
-            export(projects.core.domain)
-            export(projects.core.data)
+            export(project(":ui:ios"))
+            export(project(":feature:diary"))
+            export(project(":platform:ios"))
+            export(project(":core:common"))
+            export(project(":core:domain"))
+            export(project(":core:data"))
         }
     }
     
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(projects.ui.ios)
-                implementation(projects.feature.diary)
-                implementation(projects.platform.ios)
-                implementation(projects.core.common)
-                implementation(projects.core.domain)
-                implementation(projects.core.data)
+                implementation(project(":ui:ios"))
+                implementation(project(":feature:diary"))
+                implementation(project(":platform:ios"))
+                implementation(project(":core:common"))
+                implementation(project(":core:domain"))
+                implementation(project(":core:data"))
                 
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:${Versions.Dependencies.kotlinDateTime}")

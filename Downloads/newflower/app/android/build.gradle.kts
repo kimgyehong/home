@@ -1,6 +1,6 @@
 plugins {
     id("com.android.application")
-    kotlin("android")
+    id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
@@ -35,14 +35,6 @@ android {
     
     kotlinOptions {
         jvmTarget = "17"
-    }
-    
-    // 명시적으로 소스셋 구성
-    sourceSets {
-        getByName("main") {
-            res.srcDirs("src/main/res")
-            assets.srcDirs("src/main/assets")
-        }
     }
     
     packaging {

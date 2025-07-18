@@ -1,6 +1,6 @@
 plugins {
     id("com.android.library") // UI 모듈은 library여야 함
-    kotlin("android")
+    id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
