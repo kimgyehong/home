@@ -1,0 +1,19 @@
+사용자가 강조한 원칙들을 다시 확인:
+  1. SOLID 원칙 준수
+  2. Detekt 원칙 준수 
+  3. SRP 원칙 준수
+  4. 하드코딩 금지
+  5. 보일러플레이트 최소화
+  6. 안드로이드 의존성, iOS 의존성 없는 코드만 쓰기
+  7. 중립코드 사용
+  8. App(런처만), UI, Platform은 의존성 사용 가능함.
+  9. 스페이스 4개 detekt 지키기. 
+  10. 100줄 이하 코드.
+  11. 최대 파일 크기: 100줄 (LargeClass) 
+  12. 최대 사이클로매틱 복잡도: 10 
+  13.  (CyclomaticComplexity) 최대 메서드 길이: 30줄
+  14. (LongMethod)  최대 줄 길이: 100자 (MaxLineLength)
+
+
+ deep think think harder 심모원려 심사숙고 완전무결
+  천의무봉

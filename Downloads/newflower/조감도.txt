@@ -1,0 +1,535 @@
+이제 종합적인 답변을 작성하겠습니다. 사용자가 요청한 기능들을 KMP 호환 구조로 구현하는 방법을 제안하겠습니다.
+
+# 꽃 다이어리 앱 완전 구현 가이드
+
+## 📱 요구사항 분석
+
+### 핵심 기능
+1. **동영상 오프닝** → 스킵 가능한 인트로 영상
+2. **타이틀 화면** → 아무 곳이나 클릭하면 메인으로 이동
+3. **일기장** → 탄생화 배경 + 꾸미기 기능 (글자 색상, 폰트 변경)
+4. **도감** → 매일 해금되는 탄생화 컬렉션 + 상세 팝업
+5. **기록 보관소** → SQLDelight 기반 일기 저장
+6. **BGM 기능** → 4가지 배경음악 선택
+7. **랜덤 로딩 화면** → 7개 이미지 중 랜덤 선택 + 톱니바퀴 애니메이션
+
+## 🏗️ KMP 호환 프로젝트 구조
+
+### 모듈 구성
+```
+flowerdiary/
+├── core/
+│   ├── common/           # 플랫폼 추상화
+│   ├── data/            # SQLDelight + Repository
+│   └── domain/          # 비즈니스 로직
+├── feature/
+│   ├── opening/         # 오프닝 영상
+│   ├── diary/           # 일기 작성
+│   ├── collection/      # 도감 기능
+│   └── settings/        # 설정 (BGM 등)
+├── platform/
+│   ├── android/         # Android 구현
+│   └── ios/             # iOS 구현
+└── ui/
+    ├── android/         # Android UI
+    └── ios/             # iOS UI
+```
+
+## 📊 데이터 구조 설계
+
+### 1. **탄생화 데이터베이스**
+```sql
+-- BirthFlower.sq
+CREATE TABLE BirthFlower (
+    id INTEGER PRIMARY KEY,
+    date_month INTEGER NOT NULL,
+    date_day INTEGER NOT NULL,
+    name_kr TEXT NOT NULL,
+    name_en TEXT NOT NULL,
+    meaning TEXT NOT NULL,
+    description TEXT NOT NULL,
+    image_url TEXT NOT NULL,
+    background_color TEXT NOT NULL,
+    unlocked INTEGER DEFAULT 0  -- 해금 여부
+);
+
+-- 365일 탄생화 데이터 삽입
+INSERT INTO BirthFlower VALUES 
+(1, 1, 1, '복수초', 'Adonis', '영원한 행복', '새해 첫날의 희망을 상징합니다', 'flower_0101.png', '#FFE4E1', 0),
+(2, 1, 2, '수선화', 'Narcissus', '자기애', '자신을 사랑하는 마음을 의미합니다', 'flower_0102.png', '#F0F8FF', 0);
+-- ... 365개 계속
+```
+
+### 2. **일기 데이터베이스**
+```sql
+-- Diary.sq
+CREATE TABLE Diary (
+    id TEXT PRIMARY KEY,
+    date_year INTEGER NOT NULL,
+    date_month INTEGER NOT NULL,
+    date_day INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    flower_id INTEGER NOT NULL,
+    font_family TEXT DEFAULT 'default',
+    font_color TEXT DEFAULT '#000000',
+    background_theme TEXT DEFAULT 'default',
+    created_at INTEGER NOT NULL,
+    updated_at INTEGER NOT NULL,
+    FOREIGN KEY (flower_id) REFERENCES BirthFlower(id)
+);
+```
+
+## 🎬 핵심 기능 구현
+
+### 1. **동영상 오프닝 화면**
+```kotlin
+// feature/opening/OpeningViewModel.kt
+class OpeningViewModel : ViewModel() {
+    private val _showSkipButton = MutableStateFlow(false)
+    val showSkipButton: StateFlow = _showSkipButton.asStateFlow()
+    
+    fun showSkipAfterDelay() {
+        viewModelScope.launch {
+            delay(2000) // 2초 후 스킵 버튼 표시
+            _showSkipButton.value = true
+        }
+    }
+    
+    fun skipOpening() {
+        // 메인 화면으로 이동
+    }
+}
+
+// ui/android/OpeningActivity.kt
+class OpeningActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        
+        // 동영상 플레이어 설정
+        val videoView = VideoView(this)
+        val uri = Uri.parse("android.resource://$packageName/raw/opening_video")
+        videoView.setVideoURI(uri)
+        
+        videoView.setOnClickListener {
+            // 스킵 기능
+            startActivity(Intent(this, TitleActivity::class.java))
+        }
+        
+        videoView.start()
+    }
+}
+```
+
+### 2. **랜덤 로딩 화면**
+```kotlin
+// core/common/LoadingImageProvider.kt
+object LoadingImageProvider {
+    private val loadingImages = listOf(
+        "loading_01.png", "loading_02.png", "loading_03.png",
+        "loading_04.png", "loading_05.png", "loading_06.png", "loading_07.png"
+    )
+    
+    fun getRandomLoadingImage(): String {
+        return loadingImages.random()
+    }
+}
+
+// ui/android/LoadingView.kt
+@Composable
+fun LoadingView() {
+    val randomImage = remember { LoadingImageProvider.getRandomLoadingImage() }
+    val rotationState by rememberInfiniteTransition().animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(2000, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        )
+    )
+    
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        // 배경 이미지
+        Image(
+            painter = painterResource(randomImage),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+        
+        // 하단 좌측 로딩 인디케이터
+        Row(
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(FlowerDiaryDimens.Padding.Large),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource("ic_gear.png"),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(24.dp)
+                    .graphicsLayer { rotationZ = rotationState }
+            )
+            
+            Spacer(modifier = Modifier.width(FlowerDiaryDimens.Padding.Small))
+            
+            Text(
+                text = "Loading...",
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.White
+            )
+        }
+    }
+}
+```
+
+### 3. **365일 탄생화 도감**
+```kotlin
+// feature/collection/CollectionViewModel.kt
+class CollectionViewModel(
+    private val birthFlowerRepository: BirthFlowerRepository
+) : ViewModel() {
+    
+    private val _flowers = MutableStateFlow>(emptyList())
+    val flowers: StateFlow> = _flowers.asStateFlow()
+    
+    private val _todayFlower = MutableStateFlow(null)
+    val todayFlower: StateFlow = _todayFlower.asStateFlow()
+    
+    init {
+        unlockTodayFlower()
+        loadFlowers()
+    }
+    
+    private fun unlockTodayFlower() {
+        viewModelScope.launch {
+            val today = DateTimeUtil.getCurrentDate()
+            birthFlowerRepository.unlockFlower(today.month, today.day)
+            _todayFlower.value = birthFlowerRepository.getFlowerByDate(today.month, today.day)
+        }
+    }
+    
+    fun showFlowerDetail(flower: BirthFlower) {
+        // 상세 팝업 표시
+    }
+}
+
+// ui/android/CollectionScreen.kt
+@Composable
+fun CollectionScreen(
+    viewModel: CollectionViewModel = koinViewModel()
+) {
+    val flowers by viewModel.flowers.collectAsState()
+    val todayFlower by viewModel.todayFlower.collectAsState()
+    
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(3),
+        contentPadding = PaddingValues(FlowerDiaryDimens.Padding.Medium)
+    ) {
+        items(flowers) { flower ->
+            FlowerCard(
+                flower = flower,
+                onClick = { 
+                    if (flower.unlocked) {
+                        viewModel.showFlowerDetail(flower)
+                    }
+                }
+            )
+        }
+    }
+    
+    // 오늘의 꽃 알림
+    todayFlower?.let { flower ->
+        TodayFlowerNotification(flower = flower)
+    }
+}
+
+@Composable
+fun FlowerCard(
+    flower: BirthFlower,
+    onClick: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .padding(FlowerDiaryDimens.Padding.Small)
+            .noRippleClickable { onClick() }, // 투명 배경 클릭 문제 해결
+        colors = CardDefaults.cardColors(
+            containerColor = if (flower.unlocked) Color.White else Color.Gray
+        )
+    ) {
+        Column(
+            modifier = Modifier.padding(FlowerDiaryDimens.Padding.Small),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            if (flower.unlocked) {
+                AsyncImage(
+                    model = flower.imageUrl,
+                    contentDescription = flower.nameKr,
+                    modifier = Modifier.size(80.dp)
+                )
+            } else {
+                Icon(
+                    Icons.Default.Lock,
+                    contentDescription = "잠금됨",
+                    modifier = Modifier.size(80.dp),
+                    tint = Color.Gray
+                )
+            }
+            
+            Text(
+                text = flower.nameKr,
+                style = MaterialTheme.typography.bodySmall,
+                color = if (flower.unlocked) Color.Black else Color.Gray
+            )
+        }
+    }
+}
+```
+
+### 4. **꽃 상세 팝업 (투명 배경 클릭 문제 해결)**
+```kotlin
+// ui/android/FlowerDetailPopup.kt
+@Composable
+fun FlowerDetailPopup(
+    flower: BirthFlower,
+    onDismiss: () -> Unit
+) {
+    Dialog(
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(usePlatformDefaultWidth = false)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = 0.6f))
+                .noRippleClickable { onDismiss() }, // 배경 클릭 시 닫기
+            contentAlignment = Alignment.Center
+        ) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .wrapContentHeight()
+                    .noRippleClickable { }, // 카드 내부 클릭 시 이벤트 차단
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.parseColor(flower.backgroundColor)
+                )
+            ) {
+                Column(
+                    modifier = Modifier.padding(FlowerDiaryDimens.Padding.Large),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    AsyncImage(
+                        model = flower.imageUrl,
+                        contentDescription = flower.nameKr,
+                        modifier = Modifier.size(200.dp)
+                    )
+                    
+                    Spacer(modifier = Modifier.height(FlowerDiaryDimens.Padding.Medium))
+                    
+                    Text(
+                        text = flower.nameKr,
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                    
+                    Text(
+                        text = flower.nameEn,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.Gray
+                    )
+                    
+                    Spacer(modifier = Modifier.height(FlowerDiaryDimens.Padding.Medium))
+                    
+                    Text(
+                        text = "꽃말: ${flower.meaning}",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Medium
+                    )
+                    
+                    Spacer(modifier = Modifier.height(FlowerDiaryDimens.Padding.Small))
+                    
+                    Text(
+                        text = flower.description,
+                        style = MaterialTheme.typography.bodyMedium,
+                        textAlign = TextAlign.Center
+                    )
+                    
+                    Spacer(modifier = Modifier.height(FlowerDiaryDimens.Padding.Large))
+                    
+                    Button(
+                        onClick = onDismiss,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("닫기")
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 투명 배경 클릭 문제 해결을 위한 확장 함수
+fun Modifier.noRippleClickable(onClick: () -> Unit): Modifier = composed {
+    clickable(
+        indication = null,
+        interactionSource = remember { MutableInteractionSource() }
+    ) {
+        onClick()
+    }
+}
+```
+
+### 5. **BGM 시스템**
+```kotlin
+// platform/android/AndroidAudioManager.kt
+actual class AndroidAudioManager(
+    private val context: Context
+) : AudioManager {
+    
+    private var mediaPlayer: MediaPlayer? = null
+    private val bgmTracks = listOf(
+        R.raw.bgm_spring,
+        R.raw.bgm_summer,
+        R.raw.bgm_autumn,
+        R.raw.bgm_winter
+    )
+    
+    actual override fun playBGM(trackIndex: Int) {
+        stopBGM()
+        
+        mediaPlayer = MediaPlayer.create(context, bgmTracks[trackIndex]).apply {
+            isLooping = true
+            start()
+        }
+    }
+    
+    actual override fun stopBGM() {
+        mediaPlayer?.apply {
+            stop()
+            release()
+        }
+        mediaPlayer = null
+    }
+    
+    actual override fun setBGMVolume(volume: Float) {
+        mediaPlayer?.setVolume(volume, volume)
+    }
+}
+
+// core/common/AudioManager.kt
+expect class AudioManager {
+    fun playBGM(trackIndex: Int)
+    fun stopBGM()
+    fun setBGMVolume(volume: Float)
+}
+```
+
+### 6. **일기 꾸미기 기능**
+```kotlin
+// feature/diary/DiaryEditorViewModel.kt
+class DiaryEditorViewModel(
+    private val diaryRepository: DiaryRepository
+) : ViewModel() {
+    
+    private val _selectedFontFamily = MutableStateFlow("default")
+    val selectedFontFamily: StateFlow = _selectedFontFamily.asStateFlow()
+    
+    private val _selectedFontColor = MutableStateFlow(Color.Black)
+    val selectedFontColor: StateFlow = _selectedFontColor.asStateFlow()
+    
+    private val _backgroundFlower = MutableStateFlow(null)
+    val backgroundFlower: StateFlow = _backgroundFlower.asStateFlow()
+    
+    fun changeFontFamily(fontFamily: String) {
+        _selectedFontFamily.value = fontFamily
+    }
+    
+    fun changeFontColor(color: Color) {
+        _selectedFontColor.value = color
+    }
+    
+    fun setBackgroundFlower(flower: BirthFlower) {
+        _backgroundFlower.value = flower
+    }
+}
+
+// ui/android/DiaryEditorScreen.kt
+@Composable
+fun DiaryEditorScreen(
+    viewModel: DiaryEditorViewModel = koinViewModel()
+) {
+    val fontFamily by viewModel.selectedFontFamily.collectAsState()
+    val fontColor by viewModel.selectedFontColor.collectAsState()
+    val backgroundFlower by viewModel.backgroundFlower.collectAsState()
+    
+    Box(modifier = Modifier.fillMaxSize()) {
+        // 배경 꽃 이미지
+        backgroundFlower?.let { flower ->
+            AsyncImage(
+                model = flower.imageUrl,
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop,
+                alpha = 0.3f
+            )
+        }
+        
+        // 일기 작성 영역
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(FlowerDiaryDimens.Padding.Medium)
+        ) {
+            // 꾸미기 도구바
+            DiaryToolbar(
+                onFontFamilyChange = viewModel::changeFontFamily,
+                onFontColorChange = viewModel::changeFontColor,
+                onBackgroundChange = viewModel::setBackgroundFlower
+            )
+            
+            // 일기 입력 필드
+            OutlinedTextField(
+                value = diaryContent,
+                onValueChange = { diaryContent = it },
+                modifier = Modifier.fillMaxSize(),
+                textStyle = TextStyle(
+                    fontFamily = getFontFamily(fontFamily),
+                    color = fontColor,
+                    fontSize = 16.sp
+                ),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    backgroundColor = Color.White.copy(alpha = 0.8f)
+                )
+            )
+        }
+    }
+}
+```
+
+## 🎯 핵심 해결 포인트
+
+### 1. **투명 배경 클릭 문제 해결**
+- `indication = null` 설정으로 리플 효과 제거[1]
+- `MutableInteractionSource` 사용으로 클릭 상태 제어
+
+### 2. **랜덤 로딩 화면**
+- 앱 시작 시 7개 이미지 중 랜덤 선택[2]
+- 톱니바퀴 회전 애니메이션 구현
+
+### 3. **365일 탄생화 시스템**
+- 매일 자동 해금 시스템 구현[3]
+- SQLDelight로 탄생화 데이터 관리
+
+### 4. **BGM 시스템**
+- `expect/actual` 패턴으로 플랫폼별 오디오 처리
+- 백그라운드 음악 지속 재생
+
+### 5. **일기 꾸미기**
+- 폰트 패밀리, 색상 변경 기능
+- 탄생화 배경 이미지 적용
+
+이 구조는 **완전한 KMP 호환성**을 보장하며, **Android와 iOS 모두에서 동일한 비즈니스 로직**을 사용할 수 있습니다. UI 계층만 플랫폼별로 구현하여 네이티브 성능과 사용자 경험을 제공합니다.

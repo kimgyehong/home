@@ -1,0 +1,186 @@
+🏗️ 꽃 다이어리 프로젝트 구조 분석
+📊 전체 아키텍처 개요
+┌─────────────────────────────────────────────────────────────┐
+│                    Application Layer                        │
+├─────────────────────┬───────────────────────────────────────┤
+│   app:android       │            app:ios                    │
+│   (런처 앱)          │         (런처 앱)                      │
+└─────────────────────┴───────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────┐
+│                      UI Layer                               │
+├─────────────────────┬───────────────────────────────────────┤
+│   ui:android        │            ui:ios                     │
+│   (Compose)         │         (SwiftUI)                     │
+└─────────────────────┴───────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────┐
+│                   Feature Layer (Shared)                    │
+├─────────────────────────────────────────────────────────────┤
+│                  feature:diary                              │
+│              (ViewModels, States)                           │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────┐
+│                   Domain Layer (Shared)                     │
+├─────────────────────────────────────────────────────────────┤
+│                   core:domain                               │
+│         (Entities, Use Cases, Repositories)                 │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────┐
+│                    Data Layer (Shared)                      │
+├─────────────────────────────────────────────────────────────┤
+│                    core:data                                │
+│        (SQLDelight, Repository Implementations)             │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────┐
+│                   Common Layer (Shared)                     │
+├─────────────────────────────────────────────────────────────┤
+│                   core:common                               │
+│      (Constants, Utils, Platform Abstractions)             │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────┐
+│                  Platform Layer (Actual)                    │
+├─────────────────────┬───────────────────────────────────────┤
+│   platform:android  │         platform:ios                 │
+│   (Android 구현)     │        (iOS 구현)                     │
+└─────────────────────┴───────────────────────────────────────┘
+🔗 의존성 흐름 (Dependency Flow)
+상향식 의존성 (Bottom-Up)
+platform:* → core:common → core:domain → core:data → feature:diary → ui:* → app:*
+세부 의존성 관계
+core:common (최하위 계층)
+
+의존성: 없음 (순수 Kotlin만)
+역할: 플랫폼 추상화, 상수, 유틸리티
+platform:android/ios
+
+의존성: core:common
+역할: expect/actual 구현체 제공
+core:domain
+
+의존성: core:common
+역할: 비즈니스 로직, 엔티티, 유스케이스
+core:data
+
+의존성: core:common + core:domain
+역할: 데이터 저장소, SQLDelight 구현
+feature:diary
+
+의존성: core:common + core:domain + core:data
+역할: 비즈니스 로직 조합, ViewModel
+ui:android/ios
+
+의존성: feature:diary + core:*
+역할: 플랫폼별 UI 구현
+app:android/ios
+
+의존성: ui:* + platform:* + 모든 모듈
+역할: 앱 런처, DI 설정
+📁 모듈별 상세 구조
+🔧 Core 모듈들 (플랫폼 중립)
+core:common
+core/common/src/commonMain/kotlin/com/flowerdiary/common/
+├── constants/
+│   ├── ColorPalette.kt      # 색상 상수
+│   ├── Config.kt            # 앱 설정 상수
+│   ├── Dimens.kt            # UI 크기 상수
+│   └── BirthFlowerConstants.kt
+├── platform/               # expect 인터페이스들
+│   ├── DatabaseDriverProvider.kt
+│   ├── AudioManager.kt
+│   ├── FileStore.kt
+│   ├── DateTimeUtil.kt
+│   └── PreferencesStore.kt
+├── utils/
+│   ├── ExceptionUtil.kt     # 예외 처리 유틸
+│   └── Logger.kt            # 로깅 유틸
+├── data/
+│   └── UnitOfWork.kt        # 트랜잭션 인터페이스
+└── resources/
+    └── ResourcePathProvider.kt
+core:domain
+core/domain/src/commonMain/kotlin/com/flowerdiary/domain/
+├── model/                   # 도메인 엔티티
+│   ├── Diary.kt
+│   ├── BirthFlower.kt
+│   ├── DiaryId.kt
+│   ├── FlowerId.kt
+│   ├── Mood.kt
+│   ├── Weather.kt
+│   └── DiarySettings.kt
+├── repository/              # 저장소 인터페이스
+│   ├── DiaryRepository.kt
+│   └── BirthFlowerRepository.kt
+└── usecase/                 # 비즈니스 로직
+    ├── diary/
+    └── flower/
+core:data
+core/data/src/commonMain/kotlin/com/flowerdiary/data/
+├── repository/              # 저장소 구현체
+│   ├── SqlDelightDiaryRepository.kt
+│   └── SqlDelightBirthFlowerRepository.kt
+├── model/                   # 데이터 매퍼
+│   ├── DiaryMapper.kt
+│   └── BirthFlowerMapper.kt
+├── source/                  # 데이터 소스
+│   └── BirthFlowerDataSource.kt
+├── initializer/             # 데이터 초기화
+│   ├── BirthFlowerDataInitializer.kt
+│   └── BirthFlowerDatabaseInitializer.kt
+└── SqlDelightUnitOfWork.kt  # 트랜잭션 구현
+🎯 Feature 모듈 (플랫폼 중립)
+feature:diary
+feature/diary/src/commonMain/kotlin/com/flowerdiary/feature/diary/
+├── viewmodel/               # 프레젠테이션 로직
+├── state/                   # UI 상태 관리
+├── usecase/                 # Feature별 유스케이스
+└── model/                   # UI 모델
+🔌 Platform 모듈들 (플랫폼 특화)
+platform:android
+platform/android/src/main/kotlin/com/flowerdiary/platform/android/
+├── AndroidDatabaseDriverProvider.kt
+├── AndroidAudioManager.kt
+├── AndroidFileStore.kt
+├── AndroidDateTimeUtil.kt
+└── AndroidPreferencesStore.kt
+platform:ios
+platform/ios/src/iosMain/kotlin/com/flowerdiary/platform/ios/
+├── IosDatabaseDriverProvider.kt
+├── IosAudioManager.kt
+├── IosFileStore.kt
+├── IosDateTimeUtil.kt
+└── IosPreferencesStore.kt
+🎨 UI 모듈들 (플랫폼 특화)
+ui:android (Jetpack Compose)
+Compose UI 구현
+Android 네이티브 컴포넌트
+Material Design 3
+ui:ios (SwiftUI)
+SwiftUI 구현
+iOS 네이티브 컴포넌트
+iOS Human Interface Guidelines
+🎯 핵심 설계 원칙
+1. 플랫폼 중립성 (Platform Neutrality)
+core:*, feature:* 모듈은 100% 순수 Kotlin
+Android/iOS 의존성 완전 배제
+expect/actual 패턴으로 플랫폼 추상화
+2. 단방향 의존성 (Unidirectional Dependency)
+상위 계층만 하위 계층에 의존
+순환 의존성 완전 차단
+Clean Architecture 원칙 준수
+3. 관심사 분리 (Separation of Concerns)
+각 모듈이 명확한 단일 책임
+비즈니스 로직과 UI 로직 완전 분리
+데이터 계층과 도메인 계층 분리
+4. 의존성 역전 (Dependency Inversion)
+인터페이스에 의존, 구현체에 의존하지 않음
+expect/actual 패턴으로 플랫폼 추상화
+Repository 패턴으로 데이터 소스 추상화
+📊 모듈 크기 및 복잡도
+| 모듈 | 파일 수 | 복잡도 | 역할 | |------|---------|--------|------| | core:common | ~15개 | 낮음 | 기반 인프라 | | core:domain | ~10개 | 중간 | 비즈니스 로직 | | core:data | ~20개 | 높음 | 데이터 처리 | | feature:diary | ~15개 | 중간 | 기능 조합 | | platform:* | ~5개씩 | 낮음 | 플랫폼 구현 | | ui:* | ~20개씩 | 높음 | UI 구현 | | app:* | ~5개씩 | 낮음 | 앱 런처 |
+
+이 구조는 완벽한 KMP 아키텍처로, Android와 iOS 간 최대한의 코드 공유와 최소한의 플랫폼 특화 코드를 달성합니다! 🎉

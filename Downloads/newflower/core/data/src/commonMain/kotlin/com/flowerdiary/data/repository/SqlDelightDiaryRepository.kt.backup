@@ -1,0 +1,118 @@
+package com.flowerdiary.data.repository
+
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToList
+import app.cash.sqldelight.coroutines.mapToOneOrNull
+import com.flowerdiary.common.utils.ExceptionUtil
+import com.flowerdiary.common.utils.Logger
+import com.flowerdiary.data.FlowerDiaryDatabase
+import com.flowerdiary.data.model.DiaryMapper.toDbParams
+import com.flowerdiary.data.model.DiaryMapper.toDomain
+import com.flowerdiary.domain.model.Diary
+import com.flowerdiary.domain.model.DiaryId
+import com.flowerdiary.domain.repository.DiaryRepository
+import com.flowerdiary.common.platform.DefaultDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+
+/**
+ * SQLDelight 기반 일기 저장소 구현
+ * SOLID 원칙 준수 - 인터페이스에 의존, 구체적 구현 제공
+ */
+class SqlDelightDiaryRepository(
+    private val database: FlowerDiaryDatabase
+) : DiaryRepository {
+    
+    private val queries = database.diaryQueries
+    
+    override suspend fun findById(id: DiaryId): Result<Diary?> =
+        ExceptionUtil.runCatchingSuspend {
+            Logger.debug(TAG, "Finding diary by id: ${id.value}")
+            queries.selectById(id.value)
+                .executeAsOneOrNull()
+                ?.toDomain()
+        }
+    
+    override suspend fun findAll(): Result<List<Diary>> =
+        ExceptionUtil.runCatchingSuspend {
+            Logger.debug(TAG, "Finding all diaries")
+            queries.selectAll()
+                .executeAsList()
+                .map { it.toDomain() }
+        }
+    
+    override suspend fun findByDateRange(
+        startTimestamp: Long, 
+        endTimestamp: Long
+    ): Result<List<Diary>> =
+        ExceptionUtil.runCatchingSuspend {
+            Logger.debug(TAG, "Finding diaries in date range: $startTimestamp - $endTimestamp")
+            queries.selectByDateRange(startTimestamp, endTimestamp)
+                .executeAsList()
+                .map { it.toDomain() }
+        }
+    
+    override suspend fun findByYearMonth(year: Int, month: Int): Result<List<Diary>> =
+        ExceptionUtil.runCatchingSuspend {
+            Logger.debug(TAG, "Finding diaries for $year-$month")
+            queries.selectByYearMonth(year.toLong(), month.toLong())
+                .executeAsList()
+                .map { it.toDomain() }
+        }
+    
+    override suspend fun save(diary: Diary): Result<Unit> =
+        ExceptionUtil.runCatchingSuspend {
+            Logger.debug(TAG, "Saving diary: ${diary.id.value}")
+            queries.insertOrReplace(
+                id = diary.id.value,
+                title = diary.title,
+                content = diary.content,
+                mood = diary.mood.name,
+                weather = diary.weather.name,
+                flower_id = diary.flowerId.value.toLong(),
+                font_family = diary.fontFamily,
+                font_color = diary.fontColor,
+                background_theme = diary.backgroundTheme,
+                created_at = diary.createdAt,
+                updated_at = diary.updatedAt
+            )
+        }
+    
+    override suspend fun delete(id: DiaryId): Result<Unit> =
+        ExceptionUtil.runCatchingSuspend {
+            Logger.debug(TAG, "Deleting diary: ${id.value}")
+            queries.deleteById(id.value)
+        }
+    
+    override suspend fun count(): Result<Int> =
+        ExceptionUtil.runCatchingSuspend {
+            Logger.debug(TAG, "Counting diaries")
+            queries.countAll()
+                .executeAsOne()
+                .toInt()
+        }
+    
+    override suspend fun findByFlowerId(flowerId: Int): Result<List<Diary>> =
+        ExceptionUtil.runCatchingSuspend {
+            Logger.debug(TAG, "Finding diaries with flower id: $flowerId")
+            queries.selectByFlowerId(flowerId.toLong())
+                .executeAsList()
+                .map { it.toDomain() }
+        }
+    
+    override fun observeAll(): Flow<List<Diary>> =
+        queries.selectAll()
+            .asFlow()
+            .mapToList(DefaultDispatcher)
+            .map { list -> list.map { it.toDomain() } }
+    
+    override fun observeById(id: DiaryId): Flow<Diary?> =
+        queries.selectById(id.value)
+            .asFlow()
+            .mapToOneOrNull(DefaultDispatcher)
+            .map { it?.toDomain() }
+    
+    companion object {
+        private const val TAG = "SqlDelightDiaryRepository"
+    }
+}

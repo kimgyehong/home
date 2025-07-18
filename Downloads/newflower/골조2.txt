@@ -1,0 +1,298 @@
+## 안녕하세요! 꽃 다이어리 프로젝트 코드 품질 가이드
+
+이전 대화에서 논의한 **KMP + SQLDelight + Clean Architecture** 구조를 바탕으로, 요청하신 품질 기준에 맞는 구체적인 가이드를 제공합니다.
+
+## 1. Unit of Work 패턴 (SQLDelight 기반)
+
+### ✅ 권장 구현
+
+```kotlin
+// core-common/UnitOfWork.kt
+interface UnitOfWork {
+    suspend fun  transaction(block: suspend () -> T): Result
+}
+
+// core-diary-data/SqlDelightUnitOfWork.kt
+class SqlDelightUnitOfWork(
+    private val driver: SqlDriver
+) : UnitOfWork {
+    
+    override suspend fun  transaction(block: suspend () -> T): Result =
+        withContext(Dispatchers.IO) {
+            runCatching {
+                driver.transactionWithResult {
+                    runBlocking { block() }
+                }
+            }
+        }
+}
+
+// 사용 예시
+class DiaryService(
+    private val unitOfWork: UnitOfWork,
+    private val diaryRepo: DiaryRepository,
+    private val flowerRepo: FlowerRepository
+) {
+    suspend fun createDiaryWithFlower(diary: Diary, flower: Flower): Result =
+        unitOfWork.transaction {
+            diaryRepo.save(diary)
+            flowerRepo.save(flower)
+        }
+}
+```
+
+### ❌ 피해야 할 패턴
+```kotlin
+// 너무 많은 책임을 가진 God Unit of Work
+class GodUnitOfWork(
+    private val diaryRepo: DiaryRepository,
+    private val flowerRepo: FlowerRepository,
+    private val userRepo: UserRepository,
+    private val settingsRepo: SettingsRepository
+) {
+    // 모든 레포지토리를 알고 있음 → SRP 위반
+}
+```
+
+## 2. SOLID 원칙 준수 패턴
+
+### SRP (Single Responsibility Principle)
+```kotlin
+// ✅ 단일 책임
+class DiaryValidator {
+    fun validate(diary: Diary): ValidationResult {
+        return when {
+            diary.title.isBlank() -> ValidationResult.Error("제목은 필수입니다")
+            diary.content.length > MAX_CONTENT_LENGTH -> ValidationResult.Error("내용이 너무 깁니다")
+            else -> ValidationResult.Success
+        }
+    }
+    
+    companion object {
+        private const val MAX_CONTENT_LENGTH = 1000
+    }
+}
+
+class DiaryFormatter {
+    fun formatForDisplay(diary: Diary): DisplayDiary {
+        return DisplayDiary(
+            title = diary.title,
+            preview = diary.content.take(100),
+            formattedDate = formatDate(diary.createdAt)
+        )
+    }
+}
+```
+
+### OCP (Open-Closed Principle)
+```kotlin
+// ✅ 확장 가능한 전략 패턴
+sealed interface FlowerRecommendationStrategy {
+    suspend fun recommend(mood: Mood, weather: Weather): Flower
+}
+
+class SeasonBasedStrategy : FlowerRecommendationStrategy {
+    override suspend fun recommend(mood: Mood, weather: Weather): Flower {
+        // 계절별 추천 로직
+    }
+}
+
+class MoodBasedStrategy : FlowerRecommendationStrategy {
+    override suspend fun recommend(mood: Mood, weather: Weather): Flower {
+        // 기분별 추천 로직
+    }
+}
+```
+
+## 3. Detekt 규칙 준수
+
+### 공통 상수 파일 생성
+```kotlin
+// core-common/Constants.kt
+object AppConstants {
+    const val DATABASE_NAME = "flower_diary.db"
+    const val DATABASE_VERSION = 1
+    const val DEFAULT_PAGE_SIZE = 20
+    const val MAX_TITLE_LENGTH = 50
+    const val MAX_CONTENT_LENGTH = 1000
+}
+
+// core-common/Dimensions.kt
+@JvmInline
+value class LogicalPx(val value: Float)
+
+object FlowerDiaryDimens {
+    object Padding {
+        val Small = LogicalPx(8f)
+        val Medium = LogicalPx(16f)
+        val Large = LogicalPx(24f)
+    }
+    
+    object Height {
+        val BottomNav = LogicalPx(56f)
+        val TopBar = LogicalPx(56f)
+    }
+}
+```
+
+### 예외 처리 모듈화
+```kotlin
+// core-common/ExceptionUtil.kt
+object ExceptionUtil {
+    
+    inline fun  safeCall(
+        action: () -> T,
+        onError: (Throwable) -> T
+    ): T = try {
+        action()
+    } catch (e: Exception) {
+        onError(e)
+    }
+    
+    suspend inline fun  safeSuspendCall(
+        crossinline action: suspend () -> T,
+        crossinline onError: suspend (Throwable) -> T
+    ): T = try {
+        action()
+    } catch (e: Exception) {
+        onError(e)
+    }
+}
+
+// 사용 예시
+class DiaryRepository {
+    suspend fun findById(id: DiaryId): Result =
+        ExceptionUtil.safeSuspendCall(
+            action = { queries.selectById(id.value).executeAsOneOrNull() },
+            onError = { Result.failure(it) }
+        ).let { Result.success(it) }
+}
+```
+
+## 4. 플랫폼 중립 설계
+
+### 날짜/시간 처리
+```kotlin
+// core-common/DateTimeUtil.kt
+expect object DateTimeUtil {
+    fun now(): Long
+    fun format(timestamp: Long, pattern: String): String
+}
+
+// platform-android/DateTimeUtil.kt
+actual object DateTimeUtil {
+    actual fun now(): Long = System.currentTimeMillis()
+    actual fun format(timestamp: Long, pattern: String): String =
+        SimpleDateFormat(pattern, Locale.getDefault()).format(Date(timestamp))
+}
+```
+
+### 파일 처리
+```kotlin
+// core-common/FileManager.kt
+expect interface FileManager {
+    suspend fun saveImage(data: ByteArray, fileName: String): String
+    suspend fun loadImage(fileName: String): ByteArray?
+}
+
+// platform-android/AndroidFileManager.kt
+actual class AndroidFileManager(
+    private val context: Context
+) : FileManager {
+    actual override suspend fun saveImage(data: ByteArray, fileName: String): String =
+        withContext(Dispatchers.IO) {
+            // Android 구현
+        }
+}
+```
+
+## 5. 보일러플레이트 최소화
+
+### 확장 함수 활용
+```kotlin
+// core-common/Extensions.kt
+fun String.isValidEmail(): Boolean =
+    android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
+fun  List.safeGet(index: Int): T? =
+    if (index in indices) this[index] else null
+
+// Result 확장
+inline fun  Result.onSuccessOrLog(action: (T) -> Unit): Result {
+    onSuccess(action)
+    onFailure { Logger.e("Operation failed", it) }
+    return this
+}
+```
+
+### 데이터 클래스 활용
+```kotlin
+// core-diary-domain/model/Diary.kt
+data class Diary(
+    val id: DiaryId,
+    val title: String,
+    val content: String,
+    val mood: Mood,
+    val weather: Weather,
+    val createdAt: Long,
+    val updatedAt: Long
+) {
+    fun isEmpty(): Boolean = title.isBlank() && content.isBlank()
+    
+    fun preview(maxLength: Int = 100): String =
+        content.take(maxLength).let { if (it.length < content.length) "$it..." else it }
+}
+```
+
+## 6. 작업 우선순위 체크리스트
+
+### 1단계: 공통 파일 생성
+- [x] `Constants.kt` - 매직 넘버 제거
+- [x] `Dimensions.kt` - UI 크기 상수
+- [x] `ExceptionUtil.kt` - 예외 처리 통합
+
+### 2단계: Detekt 규칙 적용
+```kotlin
+// detekt.yml 설정 예시
+complexity:
+  CyclomaticComplexMethod:
+    threshold: 15
+  LongMethod:
+    threshold: 60
+  
+style:
+  MagicNumber:
+    ignoreNumbers: [-1, 0, 1, 2, 100]
+  
+exceptions:
+  TooGenericExceptionCaught:
+    exceptionNames:
+      - Exception
+      - Throwable
+```
+
+### 3단계: CI 통합
+```yaml
+# .github/workflows/quality-check.yml
+- name: Run detekt
+  run: ./gradlew detekt
+  
+- name: Fail on detekt violations
+  run: |
+    if grep -q "TooGenericExceptionCaught" build/reports/detekt/detekt.xml; then
+      echo "Generic exception caught detected!"
+      exit 1
+    fi
+```
+
+## 7. 실전 체크리스트
+
+- [ ] 모든 상수는 `Constants.kt` 또는 `companion object`에 정의
+- [ ] 예외 처리는 `ExceptionUtil.kt` 패턴 사용
+- [ ] 플랫폼 API는 `expect/actual`로 추상화
+- [ ] 데이터 클래스의 메서드는 도메인 관련만 포함
+- [ ] 확장 함수로 반복 코드 제거
+- [ ] `!!` 연산자 사용 금지 (안전 호출 `?.` 사용)
+- [ ] detekt 규칙 위반 시 CI 빌드 실패
+
+이 가이드를 따르면 Swift 전환 시에도 **구조와 패턴은 그대로** 유지하면서 언어만 변경하면 됩니다. 추가 질문이나 특정 모듈 구현에 대한 상세한 가이드가 필요하시면 언제든 알려주세요!

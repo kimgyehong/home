@@ -1,0 +1,117 @@
+package com.flowerdiary.domain.model
+
+import com.flowerdiary.common.constants.Config
+import com.flowerdiary.common.constants.ColorPalette
+
+/**
+ * 탄생화 엔티티
+ * 365일 각 날짜별 탄생화 정보
+ * SRP: 탄생화 정보만 담당
+ */
+data class BirthFlower(
+    val id: FlowerId,
+    val month: Int,
+    val day: Int,
+    val nameKr: String,
+    val nameEn: String,
+    val meaning: String,
+    val description: String,
+    val imageUrl: String,
+    val backgroundColor: Long, // ARGB color as Long
+    val isUnlocked: Boolean = false
+) {
+    init {
+        require(month in 1..12) { "Month must be between 1 and 12" }
+        require(day in 1..31) { "Day must be between 1 and 31" }
+        require(nameKr.isNotBlank()) { "Korean name cannot be blank" }
+        require(nameEn.isNotBlank()) { "English name cannot be blank" }
+        require(meaning.isNotBlank()) { "Meaning cannot be blank" }
+        require(description.isNotBlank()) { "Description cannot be blank" }
+        require(imageUrl.isNotBlank()) { "Image URL cannot be blank" }
+    }
+    
+    /**
+     * 해당 날짜가 오늘인지 확인
+     */
+    fun isToday(currentMonth: Int, currentDay: Int): Boolean =
+        month == currentMonth && day == currentDay
+    
+    /**
+     * 표시용 날짜 문자열
+     */
+    fun getDateDisplay(): String = "${month}월 ${day}일"
+    
+    /**
+     * 꽃 정보 미리보기 (도감용)
+     */
+    fun getPreview(): String = 
+        if (isUnlocked) meaning else "?"
+    
+    /**
+     * 월 유효성 검증
+     */
+    fun validateMonth(): Boolean {
+        require(month in 1..Config.MONTHS_IN_YEAR) { 
+            "Month must be between 1 and ${Config.MONTHS_IN_YEAR}" 
+        }
+        return true
+    }
+    
+    /**
+     * 일 유효성 검증
+     */
+    fun validateDay(): Boolean {
+        require(day in 1..31) { "Day must be between 1 and 31" }
+        return true
+    }
+    
+    /**
+     * 이름 유효성 검증
+     */
+    fun validateName(): Boolean {
+        require(nameKr.isNotBlank()) { "Korean name cannot be blank" }
+        require(nameEn.isNotBlank()) { "English name cannot be blank" }
+        require(nameKr.length <= Config.MAX_FLOWER_NAME_LENGTH) { 
+            "Korean name length must be less than ${Config.MAX_FLOWER_NAME_LENGTH}" 
+        }
+        require(nameEn.length <= Config.MAX_FLOWER_NAME_LENGTH) { 
+            "English name length must be less than ${Config.MAX_FLOWER_NAME_LENGTH}" 
+        }
+        return true
+    }
+    
+    /**
+     * 꽃말 유효성 검증
+     */
+    fun validateMeaning(): Boolean {
+        require(meaning.isNotBlank()) { "Meaning cannot be blank" }
+        require(meaning.length <= Config.MAX_FLOWER_MEANING_LENGTH) { 
+            "Meaning length must be less than ${Config.MAX_FLOWER_MEANING_LENGTH}" 
+        }
+        return true
+    }
+    
+    /**
+     * 월 표시 형식
+     */
+    fun getMonthDisplay(): String = "${month}월"
+    
+    /**
+     * 탄생화 해금
+     */
+    fun unlock(): BirthFlower = copy(isUnlocked = true)
+    
+    /**
+     * 배경색 유효성 검증 (ARGB 형식)
+     */
+    fun isValidBackgroundColor(): Boolean {
+        return backgroundColor and ColorPalette.Text.Black != 0L
+    }
+    
+    /**
+     * 같은 날짜인지 확인
+     */
+    fun isSameDate(other: BirthFlower): Boolean {
+        return month == other.month && day == other.day
+    }
+}

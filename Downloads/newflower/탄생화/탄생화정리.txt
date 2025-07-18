@@ -1,0 +1,376 @@
+"01-01": { "flower": "스노드롭", "meaning": "희망" },
+"01-02": { "flower": "노랑수선화", "meaning": "사랑에 답하여" },
+"01-03": { "flower": "샤프란", "meaning": "후회없는 청춘" }
+"01-04": { "flower": "히아신스", "meaning": "차분한 사랑" },
+"01-05": { "flower": "노루귀", "meaning": "인내"},
+"01-06": { "flower": "흰제비꽃", "meaning": "순진무구한 사랑" }
+"01-07": { "flower": "튤립", "meaning": "실연" },
+"01-08": { "flower": "보라빛 제비꽃", "meaning": "사랑" },
+"01-09": { "flower": "노랑 제비꽃", "meaning": "수줍은 사랑" }
+"01-10": { "flower": "회양목", "meaning": "참고 견뎌냄" },
+"01-11": { "flower": "측백나무", "meaning": "견고한 우정"},
+"01-12": { "flower": "스위트 알리섬", "meaning": "빼어난 미모" }
+"01-13": { "flower": "수선화", "meaning": "신비" },
+"01-14": { "flower": "시클라멘", "meaning": "내성적 성격" },
+"01-15": { "flower": "가시", "meaning": "엄격" }
+"01-16": { "flower": "노랑 히아신스", "meaning": "승부" },
+"01-17": { "flower": "수영", "meaning": "친근한 정"},
+"01-18": { "flower": "어저귀", "meaning": "약속" }
+"01-19": { "flower": "소나무", "meaning": "불로장수" },
+"01-20": { "flower": "미나리아재비", "meaning": "천진난만" },
+"01-21": { "flower": "담쟁이덩굴", "meaning": "우정" }
+"01-22": { "flower": "이끼", "meaning": "모성애" },
+"01-23": { "flower": "부들", "meaning": "순종"},
+"01-24": { "flower": "가을에 피는 샤프란", "meaning": "절도의 미" }
+"01-25": { "flower": "점나도나물", "meaning": "순진" }
+"01-26": { "flower": "미모사", "meaning": "예민한 마음" },
+"01-27": { "flower": "마가목", "meaning": "게으름을 모르는 마음" },
+"01-28": { "flower": "검은 포폴라", "meaning": "용기" }
+"01-29": { "flower": "이끼", "meaning": "모성애" },
+"01-30": { "flower": "메리 애쉬골드", "meaning": "반드시 오고야 말 행복"},
+"01-31": { "flower": "노란 샤프란", "meaning": "청춘의 환희" }
+
+"02-01": { "flower": "앵초", "meaning": "젊은 시절과 고뇌" },
+"02-02": { "flower": "모과", "meaning": "평범" },
+"02-03": { "flower": "황새냉이", "meaning": "그대에게 바친다" }
+"02-04": { "flower": "빨간앵초", "meaning": "돌보지 않는 아름다움" },
+"02-05": { "flower": "양치", "meaning": "사랑스러움"},
+"02-06": { "flower": "바위솔", "meaning": "가사에 근면함" }
+"02-07": { "flower": "물망초", "meaning": "나를 잊지 말아요" },
+"02-08": { "flower": "범의귀", "meaning": "절실한 애정" },
+"02-09": { "flower": "은매화", "meaning": "사랑의 속삭임" }
+"02-10": { "flower": "서향", "meaning": "영광" },
+"02 -11": { "flower": "멜리사", "meaning": "동정"},
+"02-12": { "flower": "쥐꼬리 망초", "meaning": "가련미의 극치" }
+"02-13": { "flower": "갈풀", "meaning": "끈기" },
+"02-14": { "flower": "카모밀레", "meaning": "역경에 굴하지 않는 강인함" },
+"02-15": { "flower": "삼나무", "meaning": "그대를 위해 살다" }
+"02-16": { "flower": "월계수", "meaning": "명예" },
+"02-17": { "flower": "야생화", "meaning": "친숙한 자연"},
+"02-18": { "flower": "미나리아재비", "meaning": "천진난만" }
+"02-19": { "flower": "떡갈나무", "meaning": "붙임성이 좋음" },
+"02-20": { "flower": "칼미아", "meaning": "커다란 희망" },
+"02-21": { "flower": "네모필라", "meaning": "애국심" }
+"02-22": { "flower": "무궁화", "meaning": "미묘한 아름다움" },
+"02-23": { "flower": "살구꽃", "meaning": "아가씨의 수줍음"},
+"02-24": { "flower": "빙카", "meaning": "즐거운 추억" }
+"02-25": { "flower": "사향장미", "meaning": "변덕스런 사랑" }
+"02-26": { "flower": "아도니스", "meaning": "추억" },
+"02-27": { "flower": "아라비아의 별", "meaning": "순수" },
+"02-28": { "flower": "보리", "meaning": "일치단결" }
+"02-29": { "flower": "아르메리아", "meaning": "배려" }
+
+"03-01": { "flower": "수선화", "meaning": "자존" },
+"03-02": { "flower": "미나리아재비", "meaning": "아름다운 인격" },
+"03-03": { "flower": "자운영", "meaning": "나의 행복" }
+"03-04": { "flower": "나무딸기", "meaning": "애정" },
+"03-05": { "flower": "수레국화", "meaning": "행복감"},
+"03-06": { "flower": "데이지", "meaning": "명랑" }
+"03-07": { "flower": "황새냉이", "meaning": "사무치는 그리움" },
+"03-08": { "flower": "밤꽃", "meaning": "진심" },
+"03-09": { "flower": "낙엽송", "meaning": "대담" }
+"03-10": { "flower": "느릅나무", "meaning": "고귀함" },
+"03-11": { "flower": "씀바귀", "meaning": "순박함"},
+"03-12": { "flower": "수양버들", "meaning": "사랑의 슬픔" }
+"03-13": { "flower": "산 옥잠화", "meaning": "사랑의 망각" },
+"03-14": { "flower": "아몬드", "meaning": "희망" },
+"03-15": { "flower": "독당근", "meaning": "죽음도 아깝지 않음" }
+"03-16": { "flower": "박하", "meaning": "미덕" },
+"03-17": { "flower": "콩꽃", "meaning": "반드시 오고야 말 행복"},
+"03-18": { "flower": "아스파라거스", "meaning": "무변화" }
+"03-19": { "flower": "치자나무", "meaning": "한 없는 즐거움" },
+"03-20": { "flower": "보라색 튤립", "meaning": "영원한 애정" },
+"03-21": { "flower": "벚꽃난", "meaning": "인생의 출발" }
+"03-22": { "flower": "당아욱", "meaning": "은혜" },
+"03-23": { "flower": "글라디올러스", "meaning": "정열적인 사랑"},
+"03-24": { "flower": "금영화", "meaning": "희망" }
+"03-25": { "flower": "덩굴성 식물", "meaning": "아름다움" }
+"03-26": { "flower": "흰앵초", "meaning": "첫사랑" },
+"03-27": { "flower": "칼세올라리아", "meaning": "도움" },
+"03-28": { "flower": "꽃아카시아나무", "meaning": "품위" }
+"03-29": { "flower": "우엉", "meaning": "귀롭히지 말아요" }
+"03-30": { "flower": "금작화", "meaning": "청초" }
+"03-31": { "flower": "흑종초", "meaning": "꿈길의 애정" }
+
+"04-01": { "flower": "아몬드", "meaning": "진실한 사랑" },
+"04-02": { "flower": "아네모네", "meaning": "기대" },
+"04-03": { "flower": "나팔수선화", "meaning": "존경" }
+"04-04": { "flower": "빨간아네모네", "meaning": "그대를 사랑해" },
+"04-05": { "flower": "무화과", "meaning": "풍부"},
+"04-06": { "flower": "아도니스", "meaning": "영원한 행복" }
+"04-07": { "flower": "공작고사리", "meaning": "신명" },
+"04-08": { "flower": "금작화", "meaning": "박애" },
+"04-09": { "flower": "벚나무", "meaning": "정신미" }
+"04-10": { "flower": "빙카", "meaning": "즐거운 추억" },
+"04-11": { "flower": "꽃고비", "meaning": "와주세요"},
+"04-12": { "flower": "복사꽃", "meaning": "사랑의 노예" }
+"04-13": { "flower": "페르시아 국화", "meaning": "경쟁심" },
+"04-14": { "flower": "흰나팔꽃", "meaning": "경쟁심" },
+"04-15": { "flower": "펜 오키드", "meaning": "훌륭함" }
+"04-16": { "flower": "튤립", "meaning": "아름다운 노동자" },
+"04-17": { "flower": "독일창포", "meaning": "멋진 결혼"},
+"04-18": { "flower": "자운영", "meaning": "감화" }
+"04-19": { "flower": "참제비고깔", "meaning": "청명" },
+"04-20": { "flower": "배나무", "meaning": "온화한 애정" },
+"04-21": { "flower": "수양자들", "meaning": "내 가슴의 슬픔" }
+"04-22": { "flower": "과꽃", "meaning": "믿음직한 사랑" },
+"04-23": { "flower": "도라지", "meaning": "상냥하고 따뜻함"},
+"04-24": { "flower": "제라늄", "meaning": "결심" }
+"04-25": { "flower": "중국 패모", "meaning": "위엄" }
+"04-26": { "flower": "논쟁이", "meaning": "불타는 애정" },
+"04-27": { "flower": "수련", "meaning": "청순한 마음" },
+"04-28": { "flower": "빨간앵초", "meaning": "비할 바 없는 아름다움" }
+"04-29": { "flower": "동백나무", "meaning": "매력" }
+"04-30": { "flower": "금사슬나무", "meaning": "슬픈 아름다움" }
+
+"05-01": { "flower": "카우슬립", "meaning": "젊은 날의 슬픔" },
+"05-02": { "flower": "미나리아재비", "meaning": "천진난만함" },
+"05-03": { "flower": "민들레", "meaning": "신탁" }
+"05-04": { "flower": "딸기", "meaning": "존중과 애정" },
+"05-05": { "flower": "은방울꽃", "meaning": "섬세함"},
+"05-06": { "flower": "비단향꽃무", "meaning": "영원한 아름다움" }
+"05-07": { "flower": "딸기", "meaning": "사랑과 존경" },
+"05-08": { "flower": "수련", "meaning": "청순한 마음" },
+"05-09": { "flower": "겹벚꽃", "meaning": "정숙, 단아함" }
+"05-10": { "flower": "꽃창포", "meaning": "우아한 마음" },
+"05-11": { "flower": "사과", "meaning": "유혹"},
+"05-12": { "flower": "라일락", "meaning": "사랑의 싹" }
+"05-13": { "flower": "산사나무", "meaning": "유일한 사랑" },
+"05-14": { "flower": "매발톱꽃", "meaning": "승리의 맹세" },
+"05-15": { "flower": "물망초", "meaning": "진실한 사랑" }
+"05-16": { "flower": "조팝나물", "meaning": "선언" },
+"05-17": { "flower": "노랑 튤립", "meaning": "사랑의 표시"},
+"05-18": { "flower": "옥슬립 앵초", "meaning": "첫사랑" }
+"05-19": { "flower": "아리스타타", "meaning": "아름다움의 소유자" },
+"05-20": { "flower": "괭이밥", "meaning": "빛나는 마음" },
+"05-21": { "flower": "담홍색 참제비고깔", "meaning": "자유" }
+"05-22": { "flower": "귀고리꽃", "meaning": "열렬한 마음" },
+"05-23": { "flower": "풀의 싹", "meaning": "첫사랑의 추억"},
+"05-24": { "flower": "헬리오토로프", "meaning": "사랑이여 영원하라" }
+"05-25": { "flower": "삼색제비꽃", "meaning": "순애" }
+"05-26": { "flower": "올리브나무", "meaning": "평화" },
+"05-27": { "flower": "데이지", "meaning": "순수한 마음" },
+"05-28": { "flower": "박하", "meaning": "미덕" }
+"05-29": { "flower": "토끼풀", "meaning": "쾌활" }
+"05-30": { "flower": "보라빛 라일락", "meaning": "사랑의 싹이 트다" }
+"05-31": { "flower": "무릇", "meaning": "강한 자제력" }
+
+"06-01": { "flower": "장미", "meaning": "나의 마음 그대만이 아네" },
+"06-02": { "flower": "빨강 매발톱 꽃", "meaning": "솔직" },
+"06-03": { "flower": "아마", "meaning": "감사" }
+"06-04": { "flower": "장미", "meaning": "아름답게 빛나는 얼굴 모습" },
+"06-05": { "flower": "메리골드", "meaning": "가련한 애정"},
+"06-06": { "flower": "노랑 붓꽃", "meaning": "믿는 자의 행복" }
+"06-07": { "flower": "슈미트티아나", "meaning": "사모하는 마음" },
+"06-08": { "flower": "재스민", "meaning": "사랑스러움" },
+"06-09": { "flower": "스위트피", "meaning": "우아한 추억" }
+"06-10": { "flower": "수염패랭이꽃", "meaning": "의협심" },
+"06-11": { "flower": "중국패모", "meaning": "위엄"},
+"06-12": { "flower": "레제타 오도라타", "meaning": "매력" }
+"06-13": { "flower": "디기탈리스", "meaning": "가슴 속의 생각" },
+"06-14": { "flower": "뚜껑별꽃", "meaning": "추상" },
+"06-15": { "flower": "카네이션", "meaning": "정열" }
+"06-16": { "flower": "튜베로즈", "meaning": "위험한 쾌락" },
+"06-17": { "flower": "토끼풀", "meaning": "감화"},
+"06-18": { "flower": "백리향", "meaning": "용기" }
+"06-19": { "flower": "장미", "meaning": "사랑" },
+"06-20": { "flower": "꼬리풀", "meaning": "달성" },
+"06-21": { "flower": "달맞이꽃", "meaning": "자유스러운 마음" }
+"06-22": { "flower": "가막살나무", "meaning": "사랑은 죽음보다 강하다" },
+"06-23": { "flower": "접시꽃", "meaning": "열렬한 연애"},
+"06-24": { "flower": "바베나", "meaning": "가족의 화합" }
+"06-25": { "flower": "나팔꽃", "meaning": "덧없는 사랑" }
+"06-26": { "flower": "흰 라일락", "meaning": "아름다운 맹세" },
+"06-27": { "flower": "시계꽃", "meaning": "성스러운 사랑" },
+"06-28": { "flower": "제라늄", "meaning": "그대가 있기에 행복이 있네" }
+"06-29": { "flower": "빨강 제라늄", "meaning": "그대가 있어 사랑이 있네" }
+"06-30": { "flower": "인동", "meaning": "사랑의 인연" }
+
+"07-01": { "flower": "단양쑥부쟁이", "meaning": "태만" },
+"07-02": { "flower": "금어초", "meaning": "욕망" },
+"07-03": { "flower": "흰색 양귀비", "meaning": "망각" }
+"07-04": { "flower": "자목련", "meaning": "자연애" },
+"07-05": { "flower": "라벤더", "meaning": "풍부한 향기"},
+"07-06": { "flower": "해바라기", "meaning": "애모" }
+"07-07": { "flower": "서양까치밥나무", "meaning": "예상" },
+"07-08": { "flower": "버드 푸트", "meaning": "다시 만날 날까지" },
+"07-09": { "flower": "아이비 제라늄", "meaning": "진실한 애정" }
+"07-10": { "flower": "초롱꽃", "meaning": "감사" },
+"07-11": { "flower": "아스포델", "meaning": "나는 당신의 것"},
+"07-12": { "flower": "좁은입배풍동", "meaning": "참을 수 없어" }
+"07-13": { "flower": "잡초의 꽃", "meaning": "실제적인 사람" },
+"07-14": { "flower": "프록스", "meaning": "온화" },
+"07-15": { "flower": "들장미", "meaning": "사랑스러움" }
+"07-16": { "flower": "비단향꽃무", "meaning": "영원한 아름다움" },
+"07-17": { "flower": "흰색장미", "meaning": "존경"},
+"07-18": { "flower": "이끼 장미", "meaning": "가련함" }
+"07-19": { "flower": "백부자", "meaning": "아름답게 빛나다" },
+"07-20": { "flower": "가지", "meaning": "진실" },
+"07-21": { "flower": "노랑장미", "meaning": "아름다움" }
+"07-22": { "flower": "패랭이꽃", "meaning": "사모" },
+"07-23": { "flower": "장미", "meaning": "온화한 마음"},
+"07-24": { "flower": "연령초", "meaning": "그윽한 마음" }
+"07-25": { "flower": "말오줌나무", "meaning": "열심" }
+"07-26": { "flower": "향쑥", "meaning": "평화" },
+"07-27": { "flower": "제라늄", "meaning": "진실한 애정" },
+"07-28": { "flower": "패랭이꽃", "meaning": "언제나 사랑" }
+"07-29": { "flower": "선인장", "meaning": "불타는 마음" }
+"07-30": { "flower": "서양종 보리수", "meaning": "부부애" }
+"07-31": { "flower": "호박", "meaning": "광대함" }
+
+"08-01": { "flower": "빨간 양귀비", "meaning": "위로" },
+"08-02": { "flower": "수레국화", "meaning": "행복" },
+"08-03": { "flower": "수박풀", "meaning": "아가씨의 아름다운 자태" }
+"08-04": { "flower": "옥수수", "meaning": "재보" },
+"08-05": { "flower": "앨리카", "meaning": "고독"},
+"08-06": { "flower": "능소화", "meaning": "명예" }
+"08-07": { "flower": "석류", "meaning": "원숙한 아름다움" },
+"08-08": { "flower": "진달래", "meaning": "사랑의 희열" },
+"08-09": { "flower": "시스터스", "meaning": "인기" }
+"08-10": { "flower": "이끼", "meaning": "모성애" },
+"08-11": { "flower": "빨강무늬제라늄", "meaning": "위안"},
+"08-12": { "flower": "협죽도", "meaning": "위험" }
+"08-13": { "flower": "골든 로드", "meaning": "경계" },
+"08-14": { "flower": "저먼더", "meaning": "경애" },
+"08-15": { "flower": "해바라기", "meaning": "광휘" }
+"08-16": { "flower": "타마린드", "meaning": "사치" },
+"08-17": { "flower": "튤립나무", "meaning": "전원의 행복"},
+"08-18": { "flower": "접시꽃", "meaning": "열렬한 사랑" }
+"08-19": { "flower": "로사 캠피온", "meaning": "성실" },
+"08-20": { "flower": "프리지아", "meaning": "순결" },
+"08-21": { "flower": "짚신나물", "meaning": "감사" }
+"08-22": { "flower": "스피리아", "meaning": "노력" },
+"08-23": { "flower": "서양종 보리수", "meaning": "부부애"},
+"08-24": { "flower": "금잔화", "meaning": "이별의 슬픔" }
+"08-25": { "flower": "안스륨", "meaning": "사랑에 번민하는 마음" }
+"08-26": { "flower": "하이포시스 오리어", "meaning": "빛을 찾다" },
+"08-27": { "flower": "고비", "meaning": "몽상" },
+"08-28": { "flower": "에린지움", "meaning": "비밀스러운 애정" }
+"08-29": { "flower": "꽃담배", "meaning": "그대 있어 외롭지 않네" }
+"08-30": { "flower": "저먼더", "meaning": "담백, 경애" }
+"08-31": { "flower": "토끼풀", "meaning": "약속, 행운" }
+
+"09-01": { "flower": "호랑이꽃", "meaning": "나를 사랑해 주세요" },
+"09-02": { "flower": "멕시칸 아이비", "meaning": "변화" },
+"09-03": { "flower": "마거리트", "meaning": "마음속에 감춘 사랑" }
+"09-04": { "flower": "뱀무", "meaning": "만족된 사랑" },
+"09-05": { "flower": "느릅나무", "meaning": "신뢰"},
+"09-06": { "flower": "한련", "meaning": "애국심" }
+"09-07": { "flower": "오렌지", "meaning": "새색시의 기쁨" },
+"09-08": { "flower": "갓", "meaning": "무관심" },
+"09-09": { "flower": "갓개매취", "meaning": "추억" }
+"09-10": { "flower": "흰색 과꽃", "meaning": "믿는 마음" },
+"09-11": { "flower": "알로에", "meaning": "꽃도 잎새도"},
+"09-12": { "flower": "클레마티스", "meaning": "마음의 아름다움" }
+"09-13": { "flower": "버드나무", "meaning": "솔직" },
+"09-14": { "flower": "마르멜로", "meaning": "유혹" },
+"09-15": { "flower": "다알리아", "meaning": "화려함" }
+"09-16": { "flower": "용담", "meaning": "슬픈 그대가 좋아" },
+"09-17": { "flower": "에리카", "meaning": "고독"},
+"09-18": { "flower": "엉겅퀴", "meaning": "엄격" }
+"09-19": { "flower": "사초", "meaning": "자중" },
+"09-20": { "flower": "로즈메리", "meaning": "나를 생각해요" },
+"09-21": { "flower": "사프란", "meaning": "후회스런 청춘" }
+"09-22": { "flower": "퀘이킹 그라스", "meaning": "흥분" },
+"09-23": { "flower": "주목", "meaning": "고상함"},
+"09-24": { "flower": "오렌지", "meaning": "새색시의 기쁨" }
+"09-25": { "flower": "메귀리", "meaning": "음악을 좋아함" }
+"09-26": { "flower": "감", "meaning": "자연미" },
+"09-27": { "flower": "떡갈나무", "meaning": "사랑은 영원히" },
+"09-28": { "flower": "색비름", "meaning": "애정" }
+"09-29": { "flower": "사과", "meaning": "명성" }
+"09-30": { "flower": "삼나무", "meaning": "웅대" }
+
+"10-01": { "flower": "빨강 국화", "meaning": "사랑" },
+"10-02": { "flower": "살구", "meaning": "아가씨의 수줍음" },
+"10-03": { "flower": "단풍나무", "meaning": "자제" }
+"10-04": { "flower": "홉", "meaning": "순진무구" },
+"10-05": { "flower": "종려나무", "meaning": "승리"},
+"10-06": { "flower": "개암나무", "meaning": "화해" }
+"10-07": { "flower": "전나무", "meaning": "고상함" },
+"10-08": { "flower": "파슬리", "meaning": "승리" },
+"10-09": { "flower": "회향", "meaning": "극찬" }
+"10-10": { "flower": "멜론", "meaning": "포식" },
+"10-11": { "flower": "부처꽃", "meaning": "사랑의 슬픔"},
+"10-12": { "flower": "월귤", "meaning": "반항심" }
+"10-13": { "flower": "조팝나무", "meaning": "단정한 사랑" },
+"10-14": { "flower": "흰색 국화", "meaning": "진실, 고결, 정조" },
+"10-15": { "flower": "스위트 바질", "meaning": "좋은 희망" }
+"10-16": { "flower": "이끼장미", "meaning": "순진무구" },
+"10-17": { "flower": "포도", "meaning": "신뢰"},
+"10-18": { "flower": "넌출월귤", "meaning": "마음의 고통을 이해하다" }
+"10-19": { "flower": "빨강 봉선화", "meaning": "날 건드리지 마세요" },
+"10-20": { "flower": "마", "meaning": "운명" },
+"10-21": { "flower": "엉겅퀴", "meaning": "독립" }
+"10-22": { "flower": "벗풀", "meaning": "신뢰" },
+"10-23": { "flower": "흰독말풀", "meaning": "경애"},
+"10-24": { "flower": "매화", "meaning": "고결한 마음" }
+"10-25": { "flower": "단풍나무", "meaning": "염려" }
+"10-26": { "flower": "수영", "meaning": "애정" },
+"10-27": { "flower": "들장미", "meaning": "시" },
+"10-28": { "flower": "무궁화", "meaning": "미묘한 아름다움" }
+"10-29": { "flower": "해당화", "meaning": "이끄시는대로" }
+"10-30": { "flower": "로벨리아", "meaning": "악의" }
+"10-31": { "flower": "칼라", "meaning": "열혈" }
+"11-01": { "flower": "서양 모과", "meaning": "유일한 사랑" },
+"11-02": { "flower": "루피너스", "meaning": "모성애" },
+"11-03": { "flower": "브리오니아", "meaning": "거절" }
+"11-04": { "flower": "골고사리", "meaning": "진실의 위안" },
+"11-05": { "flower": "단양쑥부쟁이", "meaning": "공훈"},
+"11-06": { "flower": "등골나무", "meaning": "주저" }
+"11-07": { "flower": "메리골드", "meaning": "이별의 슬픔" },
+"11-08": { "flower": "가는동자꽃", "meaning": "기지" },
+"11-09": { "flower": "몰약의 꽃", "meaning": "진실" }
+"11-10": { "flower": "부용", "meaning": "섬세한 아름다움" },
+"11-11": { "flower": "흰동백", "meaning": "비밀스런 사랑"},
+"11-12": { "flower": "레몬", "meaning": "진심으로 사모함" }
+"11-13": { "flower": "레몬 버베나", "meaning": "인내" },
+"11-14": { "flower": "소나무", "meaning": "불로장생" },
+"11-15": { "flower": "황금싸리", "meaning": "공손" }
+"11-16": { "flower": "크리스마스 로즈", "meaning": "추억" },
+"11-17": { "flower": "머위", "meaning": "공평"},
+"11-18": { "flower": "산나리", "meaning": "장엄" }
+"11-19": { "flower": "범의 귀", "meaning": "비밀" },
+"11-20": { "flower": "뷰글라스", "meaning": "진실" },
+"11-21": { "flower": "초롱꽃", "meaning": "상실" }
+"11-22": { "flower": "매자나무", "meaning": "까다로움" },
+"11-23": { "flower": "양치", "meaning": "성실"},
+"11-24": { "flower": "가막살나무", "meaning": "사랑은 죽음보다 강하다" }
+"11-25": { "flower": "개옻나무", "meaning": "현명" }
+"11-26": { "flower": "서양톱풀", "meaning": "지도" },
+"11-27": { "flower": "붉나무", "meaning": "신앙" },
+"11-28": { "flower": "꾀꼬리", "meaning": "추상" }
+"11-29": { "flower": "바카리스", "meaning": "개척" }
+"11-30": { "flower": "낙엽 마른 풀", "meaning": "새봄을 기다림" }
+
+"12-01": { "flower": "쑥국화", "meaning": "평화" },
+"12-02": { "flower": "이끼", "meaning": "모성애" },
+"12-03": { "flower": "라벤더", "meaning": "기대" }
+"12-04": { "flower": "수영", "meaning": "애정" },
+"12-05": { "flower": "앰브로시아", "meaning": "행복한 연애"},
+"12-06": { "flower": "바위취", "meaning": "절실한 사랑" }
+"12-07": { "flower": "양치", "meaning": "신뢰" },
+"12-08": { "flower": "갈대", "meaning": "깊은 애정" },
+"12-09": { "flower": "국화", "meaning": "고결" }
+"12-10": { "flower": "빨간 동백", "meaning": "고결한 이성" },
+"12-11": { "flower": "단양쑥부쟁이", "meaning": "애국심"},
+"12-12": { "flower": "목화", "meaning": "우수" }
+"12-13": { "flower": "자홍색 국화", "meaning": "사랑" },
+"12-14": { "flower": "소나무", "meaning": "용감" },
+"12-15": { "flower": "서향", "meaning": "불멸" }
+"12-16": { "flower": "오리나무", "meaning": "장엄" },
+"12-17": { "flower": "벚꽃난", "meaning": "동감"},
+"12-18": { "flower": "세이지", "meaning": "가정의 덕" }
+"12-19": { "flower": "스노 플레이크", "meaning": "아름다움" },
+"12-20": { "flower": "파인애플", "meaning": "완전무결" },
+"12-21": { "flower": "박하", "meaning": "덕" }
+"12-22": { "flower": "백일홍", "meaning": "행복" },
+"12-23": { "flower": "플라타너스", "meaning": "천재"},
+"12-24": { "flower": "겨우살이", "meaning": "강한 인내심" }
+"12-25": { "flower": "서양호랑가시나무", "meaning": "선견지명" }
+"12-26": { "flower": "크리스마스 로즈", "meaning": "추억" },
+"12-27": { "flower": "매화", "meaning": "맑은 마음" },
+"12-28": { "flower": "석류", "meaning": "원숙미" }
+"12-29": { "flower": "꽈리", "meaning": "자연미" }
+"12-30": { "flower": "납매", "meaning": "자애" }
+"12-31": { "flower": "노솔나무", "meaning": "불멸" }

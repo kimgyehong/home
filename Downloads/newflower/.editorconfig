@@ -1,0 +1,48 @@
+# EditorConfig는 다양한 에디터와 IDE에서 일관된 코딩 스타일을 유지하도록 도와줍니다
+# editorconfig.org
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 120
+
+[*.{kt,kts}]
+# Kotlin 특화 설정
+indent_size = 4
+indent_style = space
+continuation_indent_size = 4
+insert_final_newline = true
+max_line_length = 120
+
+[*.{java}]
+# Java 설정 (필요한 경우)
+indent_size = 4
+indent_style = space
+continuation_indent_size = 8
+
+[*.{xml}]
+# XML 설정
+indent_size = 4
+indent_style = space
+continuation_indent_size = 4
+
+[*.{json,yml,yaml}]
+# JSON/YAML 설정
+indent_size = 2
+indent_style = space
+
+[*.md]
+# Markdown 설정
+trim_trailing_whitespace = false
+max_line_length = off
+
+[gradle/wrapper/gradle-wrapper.properties]
+# Gradle wrapper 속성은 수정하지 않음
+indent_size = unset
+indent_style = unset

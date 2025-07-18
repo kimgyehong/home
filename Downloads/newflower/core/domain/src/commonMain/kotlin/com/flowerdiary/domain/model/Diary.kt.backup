@@ -1,0 +1,118 @@
+package com.flowerdiary.domain.model
+
+import com.flowerdiary.common.constants.Config
+import com.flowerdiary.common.constants.ColorPalette
+
+/**
+ * 일기 엔티티
+ * 핵심 비즈니스 로직과 불변성 보장
+ * SOLID 원칙 중 SRP 적용 - 일기 관련 로직만 담당
+ */
+data class Diary(
+    val id: DiaryId,
+    val title: String,
+    val content: String,
+    val mood: Mood,
+    val weather: Weather,
+    val flowerId: FlowerId,
+    val fontFamily: String = Config.DEFAULT_FONT_FAMILY,
+    val fontSize: Float = Config.DEFAULT_FONT_SIZE,
+    val fontColor: Long = ColorPalette.Text.Black, // ARGB black
+    val backgroundTheme: String = Config.DEFAULT_BACKGROUND_THEME,
+    val createdAt: Long,
+    val updatedAt: Long
+) {
+    init {
+        require(title.length <= Config.MAX_TITLE_LENGTH) { 
+            "Title length must be less than ${Config.MAX_TITLE_LENGTH}" 
+        }
+        require(content.length <= Config.MAX_CONTENT_LENGTH) { 
+            "Content length must be less than ${Config.MAX_CONTENT_LENGTH}" 
+        }
+        require(createdAt > 0) { "Created timestamp must be positive" }
+        require(updatedAt >= createdAt) { "Updated timestamp must be after created timestamp" }
+    }
+    
+    /**
+     * 일기가 비어있는지 확인
+     */
+    fun isEmpty(): Boolean = title.isBlank() && content.isBlank()
+    
+    /**
+     * 일기 내용 미리보기 생성
+     */
+    fun getPreview(maxLength: Int = Config.PREVIEW_LENGTH): String =
+        content.take(maxLength).let { 
+            if (it.length < content.length) "$it..." else it 
+        }
+    
+    /**
+     * 제목이 없을 때 기본 제목 생성
+     */
+    fun getTitleOrDefault(): String =
+        title.ifBlank { Config.DEFAULT_TITLE_PLACEHOLDER }
+    
+    /**
+     * 수정 여부 확인
+     */
+    fun isEdited(): Boolean = updatedAt > createdAt
+    
+    /**
+     * 제목 유효성 검증
+     */
+    fun validateTitle(): Boolean {
+        require(title.length <= Config.MAX_TITLE_LENGTH) { 
+            "Title length must be less than ${Config.MAX_TITLE_LENGTH}" 
+        }
+        return true
+    }
+    
+    /**
+     * 내용 유효성 검증
+     */
+    fun validateContent(): Boolean {
+        require(content.length <= Config.MAX_CONTENT_LENGTH) { 
+            "Content length must be less than ${Config.MAX_CONTENT_LENGTH}" 
+        }
+        return true
+    }
+    
+    /**
+     * 폰트 크기 유효성 검증
+     */
+    fun isValidFontSize(): Boolean {
+        return fontSize >= Config.MIN_FONT_SIZE && fontSize <= Config.MAX_FONT_SIZE
+    }
+    
+    /**
+     * 기본 설정 여부 확인
+     */
+    fun isDefaultSettings(): Boolean {
+        return fontFamily == Config.DEFAULT_FONT_FAMILY && 
+               fontColor == ColorPalette.Text.Black && 
+               backgroundTheme == Config.DEFAULT_BACKGROUND_THEME
+    }
+    
+    /**
+     * 일기 업데이트
+     */
+    fun update(
+        title: String = this.title,
+        content: String = this.content,
+        mood: Mood = this.mood,
+        weather: Weather = this.weather,
+        fontFamily: String = this.fontFamily,
+        fontColor: Long = this.fontColor,
+        backgroundTheme: String = this.backgroundTheme,
+        updatedAt: Long = com.flowerdiary.common.platform.DateTimeUtil.now()
+    ): Diary = copy(
+        title = title,
+        content = content,
+        mood = mood,
+        weather = weather,
+        fontFamily = fontFamily,
+        fontColor = fontColor,
+        backgroundTheme = backgroundTheme,
+        updatedAt = updatedAt
+    )
+}

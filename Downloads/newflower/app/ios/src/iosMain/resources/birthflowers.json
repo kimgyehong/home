@@ -1,0 +1,58 @@
+{
+  "flowers": [
+    {
+      "date": "01-01",
+      "nameKr": "스노드롭",
+      "nameEn": "Snowdrop",
+      "meaning": "희망",
+      "description": "새해의 시작을 알리는 순백의 꽃입니다.",
+      "imageFileName": "flower_0101.png",
+      "backgroundColor": "#FFF0F5"
+    },
+    {
+      "date": "01-02",
+      "nameKr": "수선화",
+      "nameEn": "Narcissus",
+      "meaning": "자기애",
+      "description": "자신을 사랑하는 마음을 의미합니다.",
+      "imageFileName": "flower_0102.png",
+      "backgroundColor": "#F0F8FF"
+    },
+    {
+      "date": "01-03",
+      "nameKr": "크로커스",
+      "nameEn": "Crocus",
+      "meaning": "젊음의 기쁨",
+      "description": "봄을 알리는 첫 번째 꽃입니다.",
+      "imageFileName": "flower_0103.png",
+      "backgroundColor": "#E6E6FA"
+    },
+    {
+      "date": "02-01",
+      "nameKr": "앵초",
+      "nameEn": "Primrose",
+      "meaning": "젊은 시절",
+      "description": "청춘의 아름다움을 상징합니다.",
+      "imageFileName": "flower_0201.png",
+      "backgroundColor": "#FFE4E1"
+    },
+    {
+      "date": "02-02",
+      "nameKr": "모과",
+      "nameEn": "Quince",
+      "meaning": "평범",
+      "description": "소박하지만 진실한 마음을 나타냅니다.",
+      "imageFileName": "flower_0202.png",
+      "backgroundColor": "#FFF5EE"
+    },
+    {
+      "date": "03-01",
+      "nameKr": "수선화",
+      "nameEn": "Daffodil",
+      "meaning": "자긍심",
+      "description": "자신감과 긍지를 의미합니다.",
+      "imageFileName": "flower_0301.png",
+      "backgroundColor": "#FFFAF0"
+    }
+  ]
+}
