@@ -1,19 +1,32 @@
-사용자가 강조한 원칙들을 다시 확인:
-  1. SOLID 원칙 준수
-  2. Detekt 원칙 준수 
-  3. SRP 원칙 준수
-  4. 하드코딩 금지
-  5. 보일러플레이트 최소화
-  6. 안드로이드 의존성, iOS 의존성 없는 코드만 쓰기
-  7. 중립코드 사용
-  8. App(런처만), UI, Platform은 의존성 사용 가능함.
-  9. 스페이스 4개 detekt 지키기. 
-  10. 100줄 이하 코드.
-  11. 최대 파일 크기: 100줄 (LargeClass) 
-  12. 최대 사이클로매틱 복잡도: 10 
-  13.  (CyclomaticComplexity) 최대 메서드 길이: 30줄
-  14. (LongMethod)  최대 줄 길이: 100자 (MaxLineLength)
+사용자가 강조한 원칙들을 다시 확인:                                                                   
+  1. SOLID 원칙 준수 2. Detekt 원칙(구글 스타일) 준수 3. SRP 원칙 준수4. 하드코딩 금지 5. 보일러플레이트 최소화
+  6. 안드로이드 의존성, iOS 의존성 없는 코드만 쓰기 7. kotlin 사용. 8. 꼭 필요한 부분에만 안드로이드, ios 의존성 넣기. 9. context7의 코드 양식에 따라 코드를 생성 및 수정하기.  12.  꼭 한글로 말해주기. 13. 모듈 당 최대 파일 75개 14. 주석 삭제 금지. 효율화하기. 15, 파일 당 함수 10개 이하. 
+ 절대 포기 못하는 기준들:
+    - 최대 파일 크기: 120줄- 최대 메서드 길이: 60줄 - 최대 사이클로매틱 복잡도: 15 - 최대 줄 길이: 100자- 매직넘버 금지(상수 사용)- 스페이스 2개 인덴트(탭 금지), 네이밍: 클래스/인터페이스: PascalCase (e.g., MyClass), 클래스당 함수 10개 이하, 함수/변수: camelCase (e.g., myFunction), 상수: UPPER_SNAKE_CASE (e.g., MAX_VALUE). 인덴트: 스페이스 2개 (탭 금지). 줄 길이: 100자. 파일 구조: 파일당 1개 최상위 클래스, import 알파벳 순. 불필요한 중괄호 피함, 람다 표현 간결히. 
+flower-diary-v6.1/
+    ├── :core                              # 🔥 이 모듈 전체에 40개 파일
+    │   ├── src/commonMain/kotlin/
+    │   │   ├── model/                     # 15개 파일
+    │   │   ├── types/                     # 8개 파일
+    │   │   ├── database/                  # 12개 파일
+    │   │   └── platform/                  # 5개 파일
+    │   └── build.gradle.kts               # (총 40개 + build.gradle.kts)
+    │
+    ├── :feature-diary                     # 🔥 이 모듈 전체에 50개 파일
+    │   ├── src/commonMain/kotlin/
+    │   │   ├── domain/                    # 18개 파일
+    │   │   ├── data/                      # 15개 파일
+    │   │   ├── store/                     # 10개 파일
+    │   │   └── ui/                        # 7개 파일
+    │   └── build.gradle.kts               # (총 50개 + build.gradle.kts)
+    │
+    ├── :feature-flower                    # 🔥 이 모듈 전체에 35개 파일
+    ├── :feature-settings                  # 🔥 이 모듈 전체에 25개 파일
+    ├── :shared                           # 🔥 이 모듈 전체에 20개 파일
+    │   ├── src/commonMain/kotlin/
+    │   │   ├── di/                       # 12개 파일 (Koin 모듈들)
+    │   │   └── navigation/               # 8개 파일 (Navigation 관련)
 
+꼭! 명심하시고 지켜주세요.
 
- deep think think harder 심모원려 심사숙고 완전무결
-  천의무봉
+deep think think harder 심모원려 심사숙고 완전무결 천의무봉

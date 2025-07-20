@@ -1,0 +1,23 @@
+순서
+1. 오프닝 동영상이 맨 처음 재생. 터치 시 스킵 가능.(동영상 위치:C:\Users\endof\Downloads\newflower\탄생화\ui의 opening.mp4)
+C:\Users\endof\Downloads\newflower\계획의 오프닝 동영상.png 이 예시 사진.
+
+2. 타이틀 화면 진입. 타이틀 화면은 스타트 레이어와 배경 레이어가 나뉘어져 있음. 탑 레이어는 start.png 파일이고 위치는 C:\Users\endof\Downloads\newflower\탄생화\ui 임. 타이틀의 바텀 레이어는 title2.jpg 파일이며 C:\Users\endof\Downloads\newflower\탄생화\app cover art에 보관되어 있음.
+C:\Users\endof\Downloads\newflower\계획의 타이틀.png가 예시 사진.
+
+3. 타이틀 화면 아무곳이나 클릭 시 메인 화면 진입. 메인화면은 gardenwindow.jpg 파일이며 위치는 C:\Users\endof\Downloads\newflower\탄생화\ui 임.
+C:\Users\endof\Downloads\newflower\계획의 메인화면.png가 예시 사진.
+
+4. 도감은 C:\Users\endof\Downloads\newflower\탄생화\data의 poke.png의 형식으로 구현해주길 바람.(poke.png를 그대로 쓰라는 말이 아니라 poke.png는 예시이고 그대로 구현해주길 원한다는 말임. 좌측이 기본 도감 ui형태의 예시이고, 우측이 클릭시 ui 예시. 
+**poke.png는 구현 예시를 위한 그림**이며, 절대로 저 파일 자체를 이용해서 무언가를 해서는 안됨. 
+
+5. 일기장의 내용은 기록에 저장됨. 기록의 배경레이어는 C:\Users\endof\Downloads\newflower\탄생화\ui의 repo.jpg 임
+C:\Users\endof\Downloads\newflower\계획의 일기 저장소.png가 예시 사진.
+
+6. 일기는 날마다 그날의 탄생화와 매핑되어 바텀 레이어가 바뀜. 배경 레이어의 탄생화들은 C:\Users\endof\Downloads\newflower\탄생화에 1월~12월까지의 폴더에 들어있음. 탑 레이어가 줄의 역할을 하는데 그 파일은 C:\Users\endof\Downloads\newflower\탄생화\ui의 노트북.png파일임.
+C:\Users\endof\Downloads\newflower\계획의 일기장.png가 예시 사진
+
+7. bgm은 4개가 있는데 C:\Users\endof\Downloads\newflower\탄생화 폴더의 bgm, bgm2, bgm3, bgm4 mp3 파일임. 설정에서 바꿀 수 있게 해줄 것.
+
+8. 넘어갈 때마다 생기는 로딩은 일부러 화면을 감상할 수 있도록 약간의 시간을 보장할 것. 그리고 바텀 레이어는 C:\Users\endof\Downloads\newflower\탄생화\로딩 배경에 있는 loading1~7까지의 jpg파일임. 그리고 좌측 하단에는 C:\Users\endof\Downloads\newflower\탄생화\ui의 gear.png 파일의 톱니바퀴가 돌아가야 하며, 그 옆에 loading... 이라는 글자가 기울어진 흘림체로 적혀 있어야 함.
+C:\Users\endof\Downloads\newflower\계획의 로딩.png가 예시 사진.

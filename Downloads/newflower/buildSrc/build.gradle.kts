@@ -1,14 +1,17 @@
 plugins {
-    `kotlin-dsl`
+  `kotlin-dsl`
 }
 
 repositories {
-    google()
-    mavenCentral()
+  gradlePluginPortal()
+  mavenCentral()
 }
 
 dependencies {
-    implementation("com.android.tools.build:gradle:8.6.1")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0")
-    implementation("app.cash.sqldelight:gradle-plugin:2.0.2")
+  implementation(gradleApi())
+  implementation(localGroovy())
+}
+
+kotlin {
+  jvmToolchain(17)
 }

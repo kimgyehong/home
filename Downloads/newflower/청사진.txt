@@ -1,0 +1,377 @@
+지적하신 관리 포인트들에 대한 근본적 해결책
+
+  1. Fat Feature Module 방지 - "Scalable Module Strategy"
+  - 예방적 구조: 처음부터 확장 가능하도록 설계
+  - 자동 분할 기준: 명확한 분할 시점과 방법 정의
+
+  2. 하이브리드 복잡성 해결 - "Explicit Consistency"
+  - 명확한 규칙: 언제 어떤 방식을 쓸지 명확한 기준
+  - 자동화된 가드레일: 실수 방지 시스템
+
+  ---
+  🏗️ v6.2 장기 확장 가능한 구조
+
+  flower-diary-v6.2/
+  ├── buildSrc/
+  │   ├── src/main/kotlin/
+  │   │   ├── FlowerDiaryConventions.kt
+  │   │   ├── ModuleScaleManager.kt      # 🔥 모듈 크기 자동 관리
+  │   │   └── ArchitectureRules.kt       # 🔥 아키텍처 규칙 강제
+  │   └── build.gradle.kts
+  ├── docs/
+  │   ├── architecture-decisions.md      # 🔥 모든 설계 결정 문서화
+  │   ├── module-split-guide.md         # 🔥 모듈 분할 가이드
+  │   └── onboarding-guide.md           # 🔥 신규 개발자 가이드
+  │
+  ├── :core                             # 40 files
+  ├── :feature-diary                    # 🔥 확장 가능한 구조 (50 files)
+  │   ├── src/commonMain/kotlin/
+  │   │   ├── _internal/                # 🔥 내부 구현 숨기기
+  │   │   │   ├── domain/              # 내부 도메인 로직
+  │   │   │   ├── data/                # 내부 데이터 로직
+  │   │   │   └── store/               # 내부 상태 관리
+  │   │   ├── api/                     # 🔥 외부 노출 API만
+  │   │   │   ├── DiaryApi.kt         # Public interface
+  │   │   │   └── DiaryModels.kt      # Public models
+  │   │   └── ui/                      # UI 컴포넌트
+  │   ├── module-metrics.gradle.kts    # 🔥 모듈 크기 추적
+  │   └── build.gradle.kts
+  │
+  ├── :feature-flower                   # 동일한 확장 가능 구조
+  ├── :feature-settings                 # 동일한 확장 가능 구조
+  ├── :shared                          # 20 files
+  │
+  ├── androidApp/
+  └── iosApp/
+
+=> 구현 순서 
+☐ FlowerDiary v6.1 구현 시작 - buildSrc Convention Plugin 설정
+     ☐ :core 모듈 구현 (types, models, database, platform)
+     ☐ :feature-diary 모듈 구현 (domain, data, store, ui)
+     ☐ :shared 모듈 구현 (DI, navigation)
+     ☐ androidApp 및 iosApp 구현
+     ☐ 테스트 작성 및 최적화
+
+  ---
+  🔥 해결책 1: Fat Module 자동 방지 시스템
+
+  ModuleScaleManager.kt - 모듈 크기 자동 관리
+
+  // buildSrc/src/main/kotlin/ModuleScaleManager.kt
+
+  object ModuleScaleManager {
+      private const val MAX_FILES_PER_MODULE = 75
+      private const val WARNING_FILES_PER_MODULE = 60
+
+      fun checkModuleSize(project: Project) {
+          val sourceFiles = project.fileTree("src").matching {
+              include("**/*.kt")
+          }.files
+
+          when {
+              sourceFiles.size > MAX_FILES_PER_MODULE -> {
+                  throw GradleException("""
+                      ❌ Module ${project.name} has ${sourceFiles.size} files (max: $MAX_FILES_PER_MODULE)
+
+                      🔧 Consider splitting into submodules:
+                      - ${project.name}-domain
+                      - ${project.name}-data
+                      - ${project.name}-ui
+
+                      📖 See docs/module-split-guide.md for details
+                  """.trimIndent())
+              }
+
+              sourceFiles.size > WARNING_FILES_PER_MODULE -> {
+                  project.logger.warn("""
+                      ⚠️  Module ${project.name} approaching size limit: ${sourceFiles.size}/$MAX_FILES_PER_MODULE
+  files
+                      Consider preparing for module split
+                  """.trimIndent())
+              }
+          }
+      }
+  }
+
+  // build.gradle.kts에서 자동 체크
+  tasks.register("checkModuleSize") {
+      doLast {
+          ModuleScaleManager.checkModuleSize(project)
+      }
+  }
+
+  tasks.named("compileKotlin") {
+      dependsOn("checkModuleSize")
+  }
+
+  module-split-guide.md - 명확한 분할 가이드
+
+  # 모듈 분할 가이드
+
+  ## 🚨 분할 시점
+  - **75개 파일 초과**: 즉시 분할 필요
+  - **60개 파일 초과**: 분할 준비 권장
+
+  ## 🔧 분할 방법
+
+  ### Step 1: 내부 구조 확인
+  :feature-diary/
+  ├── _internal/domain/    (도메인 로직)
+  ├── _internal/data/      (데이터 로직)
+  ├── _internal/store/     (상태 관리)
+  └── ui/                  (UI 컴포넌트)
+
+  ### Step 2: 서브 모듈로 분할
+  :feature-diary-domain/   (기존 _internal/domain)
+  :feature-diary-data/     (기존 _internal/data):feature-diary-store/    (기존 _internal/store)
+  :feature-diary-ui/       (기존 ui + api)
+
+  ### Step 3: 의존성 재구성
+  ```kotlin
+  // :feature-diary-ui/build.gradle.kts
+  dependencies {
+      implementation(projects.featureDiaryDomain)
+      implementation(projects.featureDiaryData)
+      implementation(projects.featureDiaryStore)
+  }
+
+  ✅ 분할 후 검증
+
+  - 각 서브 모듈이 단일 책임을 갖는가?
+  - 순환 의존성이 없는가?
+  - 빌드 시간이 개선되었는가?
+
+  ---
+
+  ## 🔥 해결책 2: 하이브리드 복잡성 자동 해결
+
+  ### ArchitectureRules.kt - 일관성 자동 강제
+  ```kotlin
+  // buildSrc/src/main/kotlin/ArchitectureRules.kt
+
+  object ArchitectureRules {
+
+      // 🔥 타입 시스템 규칙 자동 검증
+      fun validateTypeConsistency(project: Project) {
+          val sourceFiles = project.fileTree("src").matching {
+              include("**/*.kt")
+          }.files
+
+          sourceFiles.forEach { file ->
+              val content = file.readText()
+              val packageName = extractPackage(content)
+
+              when {
+                  packageName.contains(".model.") -> {
+                      // 도메인 모델은 반드시 data class + validation
+                      if (!content.contains("data class") || !content.contains("require(")) {
+                          throw GradleException("""
+                              ❌ Domain model in ${file.name} must use:
+                              - data class (not value class)
+                              - init { require(...) } validation
+
+                              📖 See architecture-decisions.md #domain-types
+                          """.trimIndent())
+                      }
+                  }
+
+                  packageName.contains(".types.") -> {
+                      // ID 타입은 반드시 sealed interface + data class
+                      if (content.contains("@JvmInline") || content.contains("value class")) {
+                          throw GradleException("""
+                              ❌ ID types in ${file.name} must use:
+                              - sealed interface EntityId
+                              - data class FooId(...) : EntityId
+
+                              📖 See architecture-decisions.md #id-types
+                          """.trimIndent())
+                      }
+                  }
+
+                  packageName.contains(".store.") -> {
+                      // Store는 반드시 완전 불변
+                      if (content.contains("mutableListOf") || content.contains("mutableMapOf")) {
+                          throw GradleException("""
+                              ❌ Store in ${file.name} must use:
+                              - ImmutableList, ImmutableMap
+                              - No mutable collections
+
+                              📖 See architecture-decisions.md #store-immutability
+                          """.trimIndent())
+                      }
+                  }
+              }
+          }
+      }
+
+      private fun extractPackage(content: String): String {
+          return content.lines()
+              .find { it.startsWith("package ") }
+              ?.substringAfter("package ")
+              ?.substringBefore(";")
+              ?: ""
+      }
+  }
+
+  // build.gradle.kts에서 자동 검증
+  tasks.register("validateArchitecture") {
+      doLast {
+          ArchitectureRules.validateTypeConsistency(project)
+      }
+  }
+
+  tasks.named("compileKotlin") {
+      dependsOn("validateArchitecture")
+  }
+
+  architecture-decisions.md - 모든 결정 문서화
+
+  # 아키텍처 결정 기록
+
+  ## #domain-types: 도메인 타입 시스템
+
+  ### 결정: data class + validation 사용
+  ```kotlin
+  // ✅ 올바른 방법
+  data class DiaryId(val value: String) : EntityId {
+      init {
+          require(value.startsWith("diary-")) { "Invalid DiaryId" }
+      }
+  }
+
+  // ❌ 잘못된 방법
+  @JvmInline value class DiaryId(val value: String)
+  typealias DiaryId = String
+
+  이유:
+
+  1. KMP 완전 호환: 모든 플랫폼에서 동일한 동작
+  2. Serialization 안전: kotlinx-serialization 완벽 지원
+  3. 타입 안전성: 컴파일 타임 + 런타임 모두 보장
+  4. 코드 중복 방지: expect/actual 불필요
+
+  언제 사용:
+
+  - 모든 도메인 엔티티 ID (DiaryId, FlowerId, UserId)
+  - 핵심 비즈니스 로직에서 사용되는 타입
+
+  ---
+  #performance-types: 성능 최적화 타입
+
+  결정: typealias 사용
+
+  // ✅ 성능 중요 영역
+  typealias SearchQuery = String
+  typealias FilterKey = String
+  typealias SortField = String
+
+  이유:
+
+  1. 성능 우선: 메모리 오버헤드 Zero
+  2. 빈번한 생성: 검색/필터링에서 자주 생성됨
+  3. 타입 혼동 허용: 성능을 위해 일부 안전성 포기
+
+  언제 사용:
+
+  - 검색, 필터링, 정렬 관련 타입
+  - UI 상태 관련 임시 타입
+
+  ---
+  #store-immutability: Store 불변성
+
+  결정: 완전 불변 + 제어된 캐시
+
+  // ✅ 핵심 상태는 완전 불변
+  data class DiaryState(
+      val diaries: ImmutableList<Diary> = persistentListOf()
+  )
+
+  // ✅ 성능 캐시는 제어된 가변성
+  private val searchCache = mutableMapOf<String, List<Diary>>()
+  private val cacheMutex = Mutex()
+
+  이유:
+
+  1. 안전성: 핵심 상태는 절대 변경 불가
+  2. 성능: 캐시는 Mutex로 보호된 가변성 허용
+  3. 격리: 캐시 변경이 핵심 상태에 영향 없음
+
+  언제 적용:
+
+  - 모든 Store의 핵심 상태: 완전 불변
+  - 성능 최적화 캐시: 제어된 가변성 허용
+
+  ---
+
+  ## 🔥 해결책 3: 신규 개발자 온보딩 자동화
+
+  ### onboarding-guide.md - 체계적 학습 가이드
+  ```markdown
+  # 🎯 신규 개발자 온보딩 가이드
+
+  ## 1일차: 아키텍처 이해
+  - [ ] `docs/architecture-decisions.md` 읽기
+  - [ ] `./gradlew validateArchitecture` 실행해보기
+  - [ ] 왜 어떤 곳은 data class이고 어떤 곳은 typealias인지 이해
+
+  ## 2일차: 모듈 구조 파악
+  - [ ] `:feature-diary` 내부 구조 분석
+  - [ ] `_internal/` vs `api/` 차이점 이해
+  - [ ] `./gradlew checkModuleSize` 실행해보기
+
+  ## 3일차: 실제 코딩
+  - [ ] 작은 기능 하나 추가해보기
+  - [ ] 코드 리뷰에서 아키텍처 규칙 준수 확인받기
+
+  ## 🤔 자주 묻는 질문
+
+  ### Q: 왜 DiaryId는 data class인데 SearchQuery는 typealias인가요?
+  A: **성능 vs 안전성** 트레이드오프입니다.
+  - DiaryId: 도메인 핵심이므로 안전성 우선 → data class
+  - SearchQuery: 성능 중요하므로 속도 우선 → typealias
+
+  ### Q: 언제 모듈을 분할해야 하나요?
+  A: **75개 파일 초과 시** 자동으로 빌드가 실패합니다.
+  `docs/module-split-guide.md`를 참고하여 분할하세요.
+
+  ### Q: Store에서 mutableMap을 쓰면 안 되나요?
+  A: **핵심 상태**에서는 절대 안 됩니다. **캐시**에서만 Mutex와 함께 허용됩니다.
+
+  ---
+  📊 v6.2 장기 관리 포인트 해결 검증
+
+  관리 포인트 완전 해결 체크리스트
+
+  - ✅ Fat Module 자동 방지: 75개 파일 초과 시 빌드 실패
+  - ✅ 분할 가이드 제공: 명확한 분할 시점과 방법 문서화
+  - ✅ 하이브리드 규칙 자동 강제: 아키텍처 규칙 위반 시 빌드 실패
+  - ✅ 모든 결정 문서화: 왜 그렇게 설계했는지 명확한 기록
+  - ✅ 신규 개발자 가이드: 체계적 온보딩 프로세스
+  - ✅ 자동 검증 시스템: 실수 방지를 위한 빌드 타임 체크
+
+  장기 확장성 시나리오
+
+  | 시나리오        | 현재 상태    | 자동 대응              |
+  |-------------|----------|--------------------|
+  | Diary 기능 급증 | 50 files | 75개 초과 시 자동 분할 가이드 |
+  | 신규 개발자 합류   | 혼란 가능    | 체계적 온보딩 + 자동 검증    |
+  | 아키텍처 실수     | 리뷰에서 발견  | 빌드 시 자동 차단         |
+  | 타입 시스템 혼동   | 코드 리뷰    | 자동 규칙 강제 + 문서      |
+
+  ---
+  ✨ 장기 관리 포인트 완전 해결 결론
+
+  🎉 지적하신 관리 포인트들을 완전히 해결했습니다!
+
+  1. Fat Module 방지:
+
+  - 75개 파일 초과 시 자동으로 빌드 실패
+  - 명확한 분할 가이드 제공
+
+  2. 하이브리드 복잡성 해결:
+
+  - 왜 그렇게 설계했는지 모든 결정 문서화
+  - 아키텍처 규칙 위반 시 자동 빌드 실패
+  - 신규 개발자 온보딩 체계화
+
+  이제 정말로 장기적으로 관리 가능한 완벽한 청사진입니다! 

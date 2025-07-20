@@ -1,0 +1,47 @@
+ 1. 순수 코틀린 (Pure Kotlin)으로 작성되는 부분
+
+ 안드로이드나 iOS에 대한 지식이 전혀 없습니다. 프로젝트의 90% 이상을 차지하는 핵심입니다.
+
+:core
+
+프로젝트의 가장 근본적인 뼈대를 담당합니다. 데이터 모델, 타입, 데이터베이스 설계도,  플랫폼 기능에 대한 약속 등 담당.
+
+:feature-diary, :feature-flower, :feature-settings
+
+앱의 실제 두뇌입니다. 비즈니스 로직,  데이터 관리, 상태 관리, 그리고 UI가 어떻게 보여야 하는지에 대한 설계도 보유.
+
+:shared
+
+위에서 만든 모든 부품들(core, feature 등)을 어떻게 조립할지에 대한 설명서(DI 설정)와 페이지 이동 규칙(Navigation)을 담고 있습니다.
+
+특별 케이스: 빌드 시스템
+buildSrc/
+
+역할: 앱의 일부는 아니지만, 이 모든 구조가 잘 돌아가도록 돕는 '자동화 도구'들이에요. 이것도 플랫폼과 무관한 순수 코틀린(Kotlin/JVM)으로 작성됩니다.
+
+
+3. 플랫폼별로 따로 작성해야 하는 부분
+이 모듈들은 각 운영체제(Android, iOS)의 '진짜 세상'과 소통하는 부분입니다. 순수 코틀린 세상의 약속(expect)을 실제 기술로 구현(actual)하는 곳이죠.
+
+androidApp/
+
+역할:
+
+MainActivity.kt: 안드로이드 앱을 시작시키는 진입점.
+
+AndroidManifest.xml: 앱 아이콘, 권한 등 안드로이드 시스템에 필요한 설정.
+
+UI 렌더링: :feature-diary에 정의된 컴포저블 로직을 가져와 Jetpack Compose로 실제 화면을 그리는 역할.
+
+actual 구현: :core 모듈이 약속했던 기능들을 안드로이드 기술로 실제로 구현하는 곳. (예: 안드로이드용 SQLDelight 드라이버, 안드로이드 파일 시스템 접근 등)
+
+iosApp/
+
+역할:
+
+iOSApp.swift: iOS 앱을 시작시키는 진입점.
+
+UI 렌더링: :feature-diary의 UI 로직을 SwiftUI 뷰로 감싸서 실제 화면에 보여주는 역할.
+
+actual 구현: :core 모듈의 약속을 iOS 기술로 실제로 구현하는 곳. (예: iOS용 SQLDelight 드라이버, NSFileManager를 이용한 파일 접근 등)
+
