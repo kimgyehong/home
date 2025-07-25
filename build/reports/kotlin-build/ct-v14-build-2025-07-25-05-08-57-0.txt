@@ -1,0 +1,169 @@
+Gradle start parameters:
+  tasks = [:app:run]
+  excluded tasks = []
+  current dir = C:\Users\endof\Downloads\sosoproject\ct-v14
+  project properties args = []
+  system properties args = []
+
+Build failed: [Execution failed for task ':app:compileKotlin'.]
+
+Time metrics:
+  Total Gradle task time: 0.79 s
+  Spent time before task action: 0.05 s
+  Task action before worker execution: 0.01 s
+  Run compilation in Gradle worker: 0.54 s
+    Precise backup output: 0.01 s
+    Restore output: 0.01 s
+    Connect to Kotlin daemon: 0.01 s
+    Calculate output size: 0.03 s
+    Run compilation: 0.52 s
+      Incremental compilation in daemon: 0.51 s
+        Calculate initial dirty sources set: 0.02 s
+          Detect removed classes: 0.01 s
+        Sources compilation round: 0.40 s
+          Compiler initialization time: 0.09 s
+          Compiler code analysis: 0.30 s
+        Write history file: 0.00 s
+  Start gradle worker: 0.00 s
+
+Size metrics:
+  Total size of the cache directory: 423.0 KB
+    ABI snapshot size: 49 B
+  Increase memory usage: -20869048 B
+  Total memory usage at the end of build: 141.5 MB
+  Total compiler iteration: 1
+    Number of lines analyzed: 110
+    Analysis lines per second: 365
+  Start time of task action: 2025-07-24T20:08:57
+
+
+Total time for Kotlin tasks: 0.63 s (79.6 % of all tasks time)
+Time  |% of Kotlin time|Task              
+0.63 s|100.0 %         |:app:compileKotlin
+
+Task ':app:compileKotlin' finished in 0.63 s
+Task info:
+  Kotlin language version: 2.0
+Compilation log for task ':app:compileKotlin':
+  Classpath changes info passed from Gradle task: NoChanges
+  Process SignatureChanged(fqName = .kotlin_module)
+  Process SignatureChanged(fqName = MainKt.main.1)
+  Process SignatureChanged(fqName = MainKt)
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\MainKt.class on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\src\main\kotlin\Main.kt
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\MainKt.class to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups13563248957614957202\0.backup
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\MainKt$main$1.class on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\src\main\kotlin\Main.kt
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\MainKt$main$1.class to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups13563248957614957202\1.backup
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\META-INF\app.kotlin_module on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\src\main\kotlin\Main.kt
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\META-INF\app.kotlin_module to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups13563248957614957202\2.backup
+  Marking the C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\kotlin\compileKotlin\cacheable\dirty-sources.txt file as newly added
+  Compile iteration:
+    modules\app\src\main\kotlin\Main.kt <- was modified since last time
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\kotlin\compileKotlin\local-state\build-history.bin to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups13563248957614957202\3.backup
+  Reverting changes
+  Cleaning up stash
+  Incremental compilation completed
+Time metrics:
+  Total Gradle task time: 0.63 s
+  Spent time before task action: 0.05 s
+  Task action before worker execution: 0.01 s
+  Run compilation in Gradle worker: 0.54 s
+    Precise backup output: 0.01 s
+    Restore output: 0.01 s
+    Connect to Kotlin daemon: 0.01 s
+    Calculate output size: 0.03 s
+    Run compilation: 0.52 s
+      Incremental compilation in daemon: 0.51 s
+        Calculate initial dirty sources set: 0.02 s
+          Detect removed classes: 0.01 s
+        Sources compilation round: 0.40 s
+          Compiler initialization time: 0.09 s
+          Compiler code analysis: 0.30 s
+        Write history file: 0.00 s
+  Start gradle worker: 0.00 s
+Size metrics:
+  Total size of the cache directory: 423.0 KB
+    ABI snapshot size: 49 B
+  Increase memory usage: -20869048 B
+  Total memory usage at the end of build: 141.5 MB
+  Total compiler iteration: 1
+    Number of lines analyzed: 110
+    Analysis lines per second: 365
+  Start time of task action: 2025-07-24T20:08:57
+GC metrics:
+  PS MarkSweep:
+    GC count: 0
+    GC time: 0.00 s
+  PS Scavenge:
+    GC count: 1
+    GC time: 0.01 s
+
+Task ':common:compileKotlin' finished in 0.07 s
+Time metrics:
+  Total Gradle task time: 0.07 s
+
+Task ':core:compileKotlin' finished in 0.03 s
+Time metrics:
+  Total Gradle task time: 0.03 s
+
+Task ':generators:compileKotlin' finished in 0.03 s
+Time metrics:
+  Total Gradle task time: 0.03 s
+
+Task ':common:jar' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':core:jar' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':generators:jar' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':generators:processResources' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:processResources' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':core:processResources' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':common:compileJava' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':common:processResources' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':generators:compileJava' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':core:checkKotlinGradlePluginConfigurationErrors' was skipped: SKIPPED
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':core:compileJava' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':core:classes' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':common:checkKotlinGradlePluginConfigurationErrors' was skipped: SKIPPED
+
+Task ':app:checkKotlinGradlePluginConfigurationErrors' was skipped: SKIPPED
+
+Task ':generators:checkKotlinGradlePluginConfigurationErrors' was skipped: SKIPPED
+
+Task ':common:classes' finished in 0.00 s
+
+Task ':generators:classes' finished in 0.00 s
+

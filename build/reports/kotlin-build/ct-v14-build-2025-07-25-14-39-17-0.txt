@@ -1,0 +1,348 @@
+Gradle start parameters:
+  tasks = [:app:run]
+  excluded tasks = []
+  current dir = C:\Users\endof\Downloads\sosoproject\ct-v14
+  project properties args = []
+  system properties args = []
+
+Time metrics:
+  Total Gradle task time: 5.01 s
+  Spent time before task action: 0.20 s
+  Task action before worker execution: 0.03 s
+  Run compilation in Gradle worker: 3.44 s
+    Precise backup output: 0.02 s
+    Cleaning up the backup stash: 0.01 s
+    Connect to Kotlin daemon: 0.02 s
+    Calculate output size: 0.06 s
+    Run compilation: 3.41 s
+      Incremental compilation in daemon: 3.39 s
+        Store build info: 0.01 s
+        Calculate initial dirty sources set: 0.22 s
+          Compute classpath changes: 0.15 s
+            Load current classpath snapshot: 0.00 s
+              Remove duplicate classes: 0.00 s
+            Shrink current classpath snapshot: 0.01 s
+              Get lookup symbols: 0.01 s
+              Find referenced classes: 0.00 s
+              Find transitively referenced classes: 0.00 s
+            Load shrunk previous classpath snapshot: 0.00 s
+            Compute changed and impacted set: 0.13 s
+              Compute class changes: 0.13 s
+                Compute Kotlin class changes: 0.13 s
+          Detect removed classes: 0.05 s
+        Update caches: 0.05 s
+        Sources compilation round: 2.72 s
+          Compiler initialization time: 0.22 s
+          Compiler code analysis: 1.37 s
+          Compiler IR translation: 0.20 s
+          Compiler code generation: 0.92 s
+            Compiler IR lowering: 0.34 s
+            Compiler IR generation: 0.58 s
+        Write history file: 0.01 s
+        Shrink and save current classpath snapshot after compilation: 0.02 s
+          Shrink current classpath snapshot incrementally: 0.02 s
+            Load shrunk current classpath snapshot against previous lookups: 0.00 s
+          Save shrunk current classpath snapshot: 0.00 s
+  Start gradle worker: 0.00 s
+
+Size metrics:
+  Total size of the cache directory: 997.2 KB
+    ABI snapshot size: 628 B
+  Increase memory usage: 8.4 MB
+  Total memory usage at the end of build: 295.2 MB
+  Total compiler iteration: 2
+    Number of lines analyzed: 732
+    Number of lines for code generation: 732
+    Analysis lines per second: 947
+    Code generation lines per second: 1402
+    Compiler IR translation line number: 732
+    Compiler IR lowering line number: 732
+    Compiler IR generation line number: 732
+  Number of times classpath changes are computed: 1
+  Number of times classpath snapshot is shrunk and saved after compilation: 2
+    Number of classpath entries: 18
+    Size of classpath snapshot: 1.2 MB
+    Size of shrunk classpath snapshot: 117.1 KB
+  Number of times classpath snapshot is loaded: 2
+    Number of cache hits when loading classpath entry snapshots: 17
+    Number of cache misses when loading classpath entry snapshots: 1
+  Start time of task action: 2081-02-15T11:18:28
+
+
+Total time for Kotlin tasks: 4.08 s (81.3 % of all tasks time)
+Time  |% of Kotlin time|Task                     
+2.38 s|58.4 %          |:generators:compileKotlin
+1.70 s|41.6 %          |:app:compileKotlin       
+
+Task ':generators:compileKotlin' finished in 2.38 s
+Task info:
+  Kotlin language version: 2.0
+Compilation log for task ':generators:compileKotlin':
+  Classpath changes info passed from Gradle task: NoChanges
+  Process SignatureChanged(fqName = .kotlin_module)
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\classes\kotlin\main\generators\UseCaseGenerator.class on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\src\main\kotlin\generators\UseCaseGenerator.kt
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\classes\kotlin\main\generators\UseCaseGenerator.class to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups9476002455224285049\0.backup
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\classes\kotlin\main\META-INF\generators.kotlin_module on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\src\main\kotlin\generators\UseCaseGenerator.kt
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\classes\kotlin\main\META-INF\generators.kotlin_module to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups9476002455224285049\1.backup
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\classes\kotlin\main\generators\BuildScriptGenerator.class on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\src\main\kotlin\generators\BuildScriptGenerator.kt
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\classes\kotlin\main\generators\BuildScriptGenerator.class to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups9476002455224285049\2.backup
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\classes\kotlin\main\META-INF\generators.kotlin_module on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\src\main\kotlin\generators\BuildScriptGenerator.kt
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\classes\kotlin\main\generators\MainGenerator.class on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\src\main\kotlin\generators\MainGenerator.kt
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\classes\kotlin\main\generators\MainGenerator.class to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups9476002455224285049\3.backup
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\classes\kotlin\main\META-INF\generators.kotlin_module on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\src\main\kotlin\generators\MainGenerator.kt
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\classes\kotlin\main\generators\RepositoryGenerator.class on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\src\main\kotlin\generators\RepositoryGenerator.kt
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\classes\kotlin\main\generators\RepositoryGenerator.class to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups9476002455224285049\4.backup
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\classes\kotlin\main\META-INF\generators.kotlin_module on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\src\main\kotlin\generators\RepositoryGenerator.kt
+  Marking the C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\classes\kotlin\main\generators\GradleWrapperGenerator.class file as newly added
+  Marking the C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\classes\kotlin\main\generators\ResultGenerator.class file as newly added
+  Marking the C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\kotlin\compileKotlin\cacheable\dirty-sources.txt file as newly added
+  Compile iteration:
+    modules\generators\src\main\kotlin\generators\GradleWrapperGenerator.kt <- was modified since last time
+    modules\generators\src\main\kotlin\generators\UseCaseGenerator.kt <- was modified since last time
+    modules\generators\src\main\kotlin\generators\ResultGenerator.kt <- was modified since last time
+    modules\generators\src\main\kotlin\generators\BuildScriptGenerator.kt <- was modified since last time
+    modules\generators\src\main\kotlin\generators\MainGenerator.kt <- was modified since last time
+    modules\generators\src\main\kotlin\generators\RepositoryGenerator.kt <- was modified since last time
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\kotlin\compileKotlin\cacheable\dirty-sources.txt
+  Process SignatureChanged(fqName = generators.GradleWrapperGenerator)
+  Process SignatureChanged(fqName = generators.ResultGenerator)
+  Process ParentsChanged(fqName = generators.GradleWrapperGenerator)
+  Process ParentsChanged(fqName = generators.ResultGenerator)
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\kotlin\compileKotlin\cacheable\last-build.bin to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups9476002455224285049\5.backup
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\kotlin\compileKotlin\local-state\build-history.bin to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups9476002455224285049\6.backup
+  [ClasspathSnapshot] Shrunk current classpath snapshot after compilation (shrink mode = ChangedLookupsUnchangedClasspath), retained 37 / 1135 classes
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\generators\build\kotlin\compileKotlin\cacheable\caches-jvm\lookups\counters.tab to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups9476002455224285049\7.backup
+  Cleaning up stash
+  Incremental compilation completed
+Time metrics:
+  Total Gradle task time: 2.38 s
+  Spent time before task action: 0.10 s
+  Task action before worker execution: 0.01 s
+  Run compilation in Gradle worker: 2.05 s
+    Precise backup output: 0.01 s
+    Cleaning up the backup stash: 0.01 s
+    Connect to Kotlin daemon: 0.01 s
+    Calculate output size: 0.03 s
+    Run compilation: 2.04 s
+      Incremental compilation in daemon: 2.03 s
+        Store build info: 0.00 s
+        Calculate initial dirty sources set: 0.04 s
+          Detect removed classes: 0.04 s
+        Update caches: 0.03 s
+        Sources compilation round: 1.74 s
+          Compiler initialization time: 0.13 s
+          Compiler code analysis: 0.88 s
+          Compiler IR translation: 0.10 s
+          Compiler code generation: 0.62 s
+            Compiler IR lowering: 0.21 s
+            Compiler IR generation: 0.41 s
+        Write history file: 0.00 s
+        Shrink and save current classpath snapshot after compilation: 0.01 s
+          Shrink current classpath snapshot incrementally: 0.01 s
+            Load shrunk current classpath snapshot against previous lookups: 0.00 s
+          Save shrunk current classpath snapshot: 0.00 s
+  Start gradle worker: 0.00 s
+Size metrics:
+  Total size of the cache directory: 468.8 KB
+    ABI snapshot size: 375 B
+  Increase memory usage: 24.4 MB
+  Total memory usage at the end of build: 155.3 MB
+  Total compiler iteration: 1
+    Number of lines analyzed: 606
+    Number of lines for code generation: 606
+    Analysis lines per second: 686
+    Code generation lines per second: 982
+    Compiler IR translation line number: 606
+    Compiler IR lowering line number: 606
+    Compiler IR generation line number: 606
+  Number of times classpath snapshot is shrunk and saved after compilation: 1
+    Number of classpath entries: 6
+    Size of classpath snapshot: 438.9 KB
+    Size of shrunk classpath snapshot: 49.9 KB
+  Number of times classpath snapshot is loaded: 1
+    Number of cache hits when loading classpath entry snapshots: 6
+  Start time of task action: 2025-07-25T05:39:13
+GC metrics:
+  PS MarkSweep:
+    GC count: 0
+    GC time: 0.00 s
+  PS Scavenge:
+    GC count: 1
+    GC time: 0.01 s
+
+Task ':app:compileKotlin' finished in 1.70 s
+Task info:
+  Kotlin language version: 2.0
+Compilation log for task ':app:compileKotlin':
+  Classpath changes info passed from Gradle task: ToBeComputedByIncrementalCompiler
+  [ClasspathSnapshot] Shrunk current classpath snapshot for diffing, retained 70 / 1862 classes
+  [ClasspathSnapshot] Loaded shrunk previous classpath snapshot for diffing, found 70 classes
+  [ClasspathSnapshot] Changed set = ProgramSymbolSet(classes = [generators/BuildScriptGenerator, generators/RepositoryGenerator], classMembers = {}, packageMembers = {})
+  [ClasspathSnapshot] Impacted classes = []
+  Process SignatureChanged(fqName = generators.BuildScriptGenerator)
+  Process SignatureChanged(fqName = generators.RepositoryGenerator)
+  Process SignatureChanged(fqName = .kotlin_module)
+  Process SignatureChanged(fqName = KotlinProjectFactory.createProject.2.generatorFunctions.1.1)
+  Process SignatureChanged(fqName = KotlinProjectFactory.createProject.2)
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\KotlinProjectFactory.class on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\src\main\kotlin\KotlinProjectFactory.kt
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\KotlinProjectFactory.class to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups16665802044942617407\0.backup
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\KotlinProjectFactory$createProject$2.class on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\src\main\kotlin\KotlinProjectFactory.kt
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\KotlinProjectFactory$createProject$2.class to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups16665802044942617407\1.backup
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\KotlinProjectFactory$createProject$2$generatorFunctions$1$1.class on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\src\main\kotlin\KotlinProjectFactory.kt
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\KotlinProjectFactory$createProject$2$generatorFunctions$1$1.class to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups16665802044942617407\2.backup
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\GeneratedProject.class on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\src\main\kotlin\KotlinProjectFactory.kt
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\GeneratedProject.class to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups16665802044942617407\3.backup
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\META-INF\app.kotlin_module on clearing cache for C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\src\main\kotlin\KotlinProjectFactory.kt
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\classes\kotlin\main\META-INF\app.kotlin_module to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups16665802044942617407\4.backup
+  Marking the C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\kotlin\compileKotlin\cacheable\dirty-sources.txt file as newly added
+  Compile iteration:
+    modules\app\src\main\kotlin\KotlinProjectFactory.kt <- dirty member generators#BuildScriptGenerator
+  Deleting C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\kotlin\compileKotlin\cacheable\dirty-sources.txt
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\kotlin\compileKotlin\cacheable\last-build.bin to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups16665802044942617407\5.backup
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\kotlin\compileKotlin\local-state\build-history.bin to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups16665802044942617407\6.backup
+  [ClasspathSnapshot] Shrunk current classpath snapshot after compilation (shrink mode = ChangedLookupsChangedClasspath), retained 71 / 1862 classes
+  Moving C:\Users\endof\Downloads\sosoproject\ct-v14\modules\app\build\kotlin\compileKotlin\cacheable\caches-jvm\lookups\counters.tab to the stash as C:\Users\endof\AppData\Local\Temp\kotlin-backups16665802044942617407\7.backup
+  Cleaning up stash
+  Incremental compilation completed
+Time metrics:
+  Total Gradle task time: 1.70 s
+  Spent time before task action: 0.10 s
+  Task action before worker execution: 0.01 s
+  Run compilation in Gradle worker: 1.39 s
+    Precise backup output: 0.01 s
+    Cleaning up the backup stash: 0.01 s
+    Connect to Kotlin daemon: 0.01 s
+    Calculate output size: 0.04 s
+    Run compilation: 1.37 s
+      Incremental compilation in daemon: 1.36 s
+        Store build info: 0.00 s
+        Calculate initial dirty sources set: 0.17 s
+          Compute classpath changes: 0.15 s
+            Load current classpath snapshot: 0.00 s
+              Remove duplicate classes: 0.00 s
+            Shrink current classpath snapshot: 0.01 s
+              Get lookup symbols: 0.01 s
+              Find referenced classes: 0.00 s
+              Find transitively referenced classes: 0.00 s
+            Load shrunk previous classpath snapshot: 0.00 s
+            Compute changed and impacted set: 0.13 s
+              Compute class changes: 0.13 s
+                Compute Kotlin class changes: 0.13 s
+          Detect removed classes: 0.01 s
+        Update caches: 0.02 s
+        Sources compilation round: 0.98 s
+          Compiler initialization time: 0.08 s
+          Compiler code analysis: 0.48 s
+          Compiler IR translation: 0.10 s
+          Compiler code generation: 0.30 s
+            Compiler IR lowering: 0.13 s
+            Compiler IR generation: 0.17 s
+        Write history file: 0.00 s
+        Shrink and save current classpath snapshot after compilation: 0.02 s
+          Shrink current classpath snapshot incrementally: 0.01 s
+          Save shrunk current classpath snapshot: 0.00 s
+  Start gradle worker: 0.00 s
+Size metrics:
+  Total size of the cache directory: 528.4 KB
+    ABI snapshot size: 253 B
+  Increase memory usage: -16801992 B
+  Total memory usage at the end of build: 139.9 MB
+  Total compiler iteration: 1
+    Number of lines analyzed: 126
+    Number of lines for code generation: 126
+    Analysis lines per second: 261
+    Code generation lines per second: 420
+    Compiler IR translation line number: 126
+    Compiler IR lowering line number: 126
+    Compiler IR generation line number: 126
+  Number of times classpath changes are computed: 1
+  Number of times classpath snapshot is shrunk and saved after compilation: 1
+    Number of classpath entries: 12
+    Size of classpath snapshot: 748.7 KB
+    Size of shrunk classpath snapshot: 67.2 KB
+  Number of times classpath snapshot is loaded: 1
+    Number of cache hits when loading classpath entry snapshots: 11
+    Number of cache misses when loading classpath entry snapshots: 1
+  Start time of task action: 2025-07-25T05:39:15
+GC metrics:
+  PS MarkSweep:
+    GC count: 0
+    GC time: 0.00 s
+  PS Scavenge:
+    GC count: 1
+    GC time: 0.00 s
+
+Task ':app:run' finished in 0.74 s
+Time metrics:
+  Total Gradle task time: 0.74 s
+
+Task ':common:compileKotlin' finished in 0.09 s
+Time metrics:
+  Total Gradle task time: 0.09 s
+
+Task ':core:compileKotlin' finished in 0.04 s
+Time metrics:
+  Total Gradle task time: 0.04 s
+
+Task ':generators:jar' finished in 0.04 s
+Time metrics:
+  Total Gradle task time: 0.04 s
+
+Task ':common:jar' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':core:jar' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':app:compileJava' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':generators:processResources' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':core:processResources' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':common:compileJava' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':core:compileJava' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:processResources' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':common:processResources' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':core:classes' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':generators:compileJava' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':core:checkKotlinGradlePluginConfigurationErrors' was skipped: SKIPPED
+
+Task ':common:checkKotlinGradlePluginConfigurationErrors' was skipped: SKIPPED
+
+Task ':generators:checkKotlinGradlePluginConfigurationErrors' was skipped: SKIPPED
+
+Task ':app:checkKotlinGradlePluginConfigurationErrors' was skipped: SKIPPED
+
+Task ':common:classes' finished in 0.00 s
+
+Task ':generators:classes' finished in 0.00 s
+
+Task ':app:classes' finished in 0.00 s
+

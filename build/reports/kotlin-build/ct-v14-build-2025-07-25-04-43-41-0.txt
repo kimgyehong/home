@@ -1,0 +1,17 @@
+Gradle start parameters:
+  tasks = [wrapper, --gradle-version=8.5]
+  excluded tasks = []
+  current dir = /mnt/c/Users/endof/Downloads/sosoproject/ct-v14
+  project properties args = []
+  system properties args = [user.variant: , file.encoding: UTF-8, user.country: , user.language: en]
+
+Time metrics:
+  Total Gradle task time: 1.78 s
+
+
+
+No Kotlin task was run
+Task ':wrapper' finished in 1.78 s
+Time metrics:
+  Total Gradle task time: 1.78 s
+

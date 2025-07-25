@@ -1,0 +1,88 @@
+Gradle start parameters:
+  tasks = [:generated:run]
+  excluded tasks = []
+  current dir = C:\Users\endof\Downloads\sosoproject\ct-v14
+  project properties args = []
+  system properties args = []
+
+Build failed: [Execution failed for task ':generated:compileKotlin'.]
+
+Time metrics:
+  Total Gradle task time: 1.58 s
+  Spent time before task action: 0.16 s
+  Task action before worker execution: 0.06 s
+  Run compilation in Gradle worker: 1.34 s
+    Clear output: 0.00 s
+    Connect to Kotlin daemon: 0.02 s
+    Calculate output size: 0.00 s
+    Run compilation: 1.31 s
+      Incremental compilation in daemon: 1.29 s
+        Clear outputs on rebuild: 0.00 s
+        Sources compilation round: 1.21 s
+          Compiler initialization time: 0.14 s
+          Compiler code analysis: 1.03 s
+        Write history file: 0.00 s
+  Start gradle worker: 0.01 s
+
+Size metrics:
+    ABI snapshot size: 31 B
+  Increase memory usage: -45383232 B
+  Total memory usage at the end of build: 113.4 MB
+  Total compiler iteration: 1
+    Number of lines analyzed: 338
+    Analysis lines per second: 329
+  Start time of task action: 2025-07-25T05:32:56
+
+Build attributes:
+  REBUILD_REASON: Unknown Gradle changes
+
+Total time for Kotlin tasks: 1.57 s (99.8 % of all tasks time)
+Time  |% of Kotlin time|Task                    
+1.57 s|100.0 %         |:generated:compileKotlin
+
+Task ':generated:compileKotlin' finished in 1.57 s
+Task info:
+  Kotlin language version: 2.0
+Compilation log for task ':generated:compileKotlin':
+  Non-incremental compilation will be performed: UNKNOWN_CHANGES_IN_GRADLE_INPUTS
+  Cleaning 3 output directories
+Time metrics:
+  Total Gradle task time: 1.57 s
+  Spent time before task action: 0.16 s
+  Task action before worker execution: 0.06 s
+  Run compilation in Gradle worker: 1.34 s
+    Clear output: 0.00 s
+    Connect to Kotlin daemon: 0.02 s
+    Calculate output size: 0.00 s
+    Run compilation: 1.31 s
+      Incremental compilation in daemon: 1.29 s
+        Clear outputs on rebuild: 0.00 s
+        Sources compilation round: 1.21 s
+          Compiler initialization time: 0.14 s
+          Compiler code analysis: 1.03 s
+        Write history file: 0.00 s
+  Start gradle worker: 0.01 s
+Size metrics:
+    ABI snapshot size: 31 B
+  Increase memory usage: -45383232 B
+  Total memory usage at the end of build: 113.4 MB
+  Total compiler iteration: 1
+    Number of lines analyzed: 338
+    Analysis lines per second: 329
+  Start time of task action: 2025-07-25T05:32:56
+Build attributes:
+  REBUILD_REASON: Unknown Gradle changes
+GC metrics:
+  PS MarkSweep:
+    GC count: 0
+    GC time: 0.00 s
+  PS Scavenge:
+    GC count: 1
+    GC time: 0.01 s
+
+Task ':generated:processResources' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':generated:checkKotlinGradlePluginConfigurationErrors' was skipped: SKIPPED
+
